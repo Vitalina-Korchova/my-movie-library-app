@@ -1,5 +1,5 @@
-import NavPage from "../components/NavPage";
-
+import NavPage from "../components/navigation/NavPage";
+import GeneralInfoMovie from "../components/main-page/GeneralnfoAboutMovie";
 export default function MainPage() {
   return (
     <>
@@ -7,11 +7,12 @@ export default function MainPage() {
         <div className="absolute inset-y-0 right-0 w-1/2 bg-[url('/kaiser.jpg')] bg-cover bg-center"></div>
         <div className="absolute inset-y-0 left-0 w-1/2 bg-[url('/kaiser.jpg')] bg-cover bg-center scale-x-[-1]"></div>
 
-        <div className="absolute inset-0 bg-gradient-to-r from-black/100 via-black/30 to-transparent"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-transparent to-black/10"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/100 via-black/70 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-transparent to-black/50"></div>
 
         <NavPage />
-        <h1 className="z-10 text-white">MainPage</h1>
+
+        <GeneralInfoMovie />
       </div>
     </>
   );

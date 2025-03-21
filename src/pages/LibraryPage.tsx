@@ -1,4 +1,4 @@
-import NavPage from "../components/NavPage";
+import NavPage from "../components/navigation/NavPage";
 export default function LibraryPage() {
   return (
     <>
