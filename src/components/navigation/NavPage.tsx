@@ -18,7 +18,7 @@ export default function NavPage() {
                   isActive("/") ? "text-yellow-400" : "text-white"
                 }`}
               >
-                Choose movie
+                Home
                 <span className="absolute left-1/2 bottom-0 w-0 h-[1px] bg-yellow-400 transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
               </span>
             </Link>

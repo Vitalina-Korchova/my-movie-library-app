@@ -1,5 +1,6 @@
 import NavPage from "../components/navigation/NavPage";
 import GeneralInfoMovie from "../components/main-page/GeneralnfoAboutMovie";
+import Slider from "../components/main-page/Slider";
 export default function MainPage() {
   return (
     <>
@@ -13,6 +14,7 @@ export default function MainPage() {
         <NavPage />
 
         <GeneralInfoMovie />
+        <Slider />
       </div>
     </>
   );
