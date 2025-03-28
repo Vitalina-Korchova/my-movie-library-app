@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 // Import Swiper styles
 import "swiper/css";
@@ -11,28 +11,49 @@ import { Navigation } from "swiper/modules";
 export default function App() {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
+  const [activeSlideIndex, setActiveSlideIndex] = useState(5);
+
+  const arr = [
+    "./test-pic-swiper/item1.jpg",
+    "./test-pic-swiper/item2.jpg",
+    "./test-pic-swiper/item3.jpg",
+    "./test-pic-swiper/item4.jpg",
+    "./test-pic-swiper/item5.jpg",
+    "./test-pic-swiper/item6.jpg",
+    "./test-pic-swiper/item7.jpg",
+    "./test-pic-swiper/item8.jpg",
+    "./test-pic-swiper/item9.jpg",
+    "./test-pic-swiper/item10.jpg",
+    "./test-pic-swiper/item11.jpg",
+    "./test-pic-swiper/item12.jpg",
+    "./test-pic-swiper/item13.jpg",
+    "./test-pic-swiper/item14.jpg",
+    "./test-pic-swiper/item15.jpg",
+  ];
   return (
-    <div className="relative w-full h-full py-3 px-7">
+    <div className="relative w-full h-full py-3 px-7 overflow-visible">
       {/* Кнопки для стрілок */}
-      <div className="absolute top-0 left-0 flex justify-between w-full px-6">
-        <button
-          ref={prevRef}
-          className="bg-blue-500 text-white px-4 py-2 rounded"
-        >
-          Prev
-        </button>
-        <button
-          ref={nextRef}
-          className="bg-blue-500 text-white px-4 py-2 rounded"
-        >
-          Next
-        </button>
+      <div className="absolute top-0 left-0 ">
+        <div className="flex ms-3.5 space-x-4 w-full px-6">
+          <button
+            ref={prevRef}
+            className="bg-black text-white border-[1px] border-gray-500 px-4 py-2 rounded"
+          >
+            <i className="fa fa-chevron-left"></i>
+          </button>
+          <button
+            ref={nextRef}
+            className="bg-black text-white border-[1px] border-gray-500 px-4 py-2 rounded"
+          >
+            <i className="fa fa-chevron-right"></i>
+          </button>
+        </div>
       </div>
 
       {/* Слайдер */}
       <Swiper
         slidesPerView={8}
-        spaceBetween={20}
+        spaceBetween={10}
         navigation={{
           prevEl: prevRef.current,
           nextEl: nextRef.current,
@@ -47,91 +68,39 @@ export default function App() {
           }
         }}
         onSlideChange={(swiper) => {
-          console.log(
-            "Змінився слайд, зараз активний слайд:",
-            swiper.activeIndex
-          );
+          setActiveSlideIndex((swiper.realIndex + 5) % arr.length);
+        }}
+        breakpoints={{
+          1536: {
+            slidesPerView: 13,
+          },
         }}
         modules={[Navigation]}
-        className="w-full h-full mt-12"
+        className="w-full h-full mt-8 overflow-visible"
       >
-        <SwiperSlide className="flex justify-center items-center text-lg bg-white">
-          <img
-            className="h-44 w-[150px]"
-            src="./test-pic-swiper/item1.jpg"
-            alt=""
-          />
-        </SwiperSlide>
-        <SwiperSlide className="flex justify-center items-center text-lg bg-white">
-          <img
-            className="h-44 w-[150px]"
-            src="./test-pic-swiper/item2.jpg"
-            alt=""
-          />
-        </SwiperSlide>
-        <SwiperSlide className="flex justify-center items-center text-lg bg-white">
-          <img
-            className="h-44 w-[150px]"
-            src="./test-pic-swiper/item3.jpg"
-            alt=""
-          />
-        </SwiperSlide>
-        <SwiperSlide className="flex justify-center items-center text-lg bg-white">
-          <img
-            className="h-44 w-[150px]"
-            src="./test-pic-swiper/item4.jpg"
-            alt=""
-          />
-        </SwiperSlide>
-        <SwiperSlide className="flex justify-center items-center text-lg bg-white">
-          <img
-            className="h-44 w-[150px]"
-            src="./test-pic-swiper/item5.jpg"
-            alt=""
-          />
-        </SwiperSlide>
-        <SwiperSlide className="flex justify-center items-center text-lg bg-white">
-          <img
-            className="h-44 w-[150px]"
-            src="./test-pic-swiper/item6.jpg"
-            alt=""
-          />
-        </SwiperSlide>
-        <SwiperSlide className="flex justify-center items-center text-lg bg-white">
-          <img
-            className="h-44 w-[150px]"
-            src="./test-pic-swiper/item7.jpg"
-            alt=""
-          />
-        </SwiperSlide>
-        <SwiperSlide className="flex justify-center items-center text-lg bg-white">
-          <img
-            className="h-44 w-[150px]"
-            src="./test-pic-swiper/item8.jpg"
-            alt=""
-          />
-        </SwiperSlide>
-        <SwiperSlide className="flex justify-center items-center text-lg bg-white">
-          <img
-            className="h-44 w-[150px]"
-            src="./test-pic-swiper/item9.jpg"
-            alt=""
-          />
-        </SwiperSlide>
-        <SwiperSlide className="flex justify-center items-center text-lg bg-white">
-          <img
-            className="h-44 w-[150px]"
-            src="./test-pic-swiper/item10.jpg"
-            alt=""
-          />
-        </SwiperSlide>
-        <SwiperSlide className="flex justify-center items-center text-lg bg-white">
-          <img
-            className="h-44 w-[150px]"
-            src="./test-pic-swiper/item11.jpg"
-            alt=""
-          />
-        </SwiperSlide>
+        {arr.map((image, index) => (
+          <SwiperSlide
+            key={index}
+            className="group relative overflow-hidden rounded-xl transition-all
+             duration-500 ease-in-out"
+          >
+            <div
+              className={`relative overflow-hidden rounded-xl transition-all duration-500 
+              ease-in-out transform ${
+                index === activeSlideIndex
+                  ? "scale-100 opacity-100"
+                  : "scale-[85%] opacity-65"
+              }`}
+            >
+              <img
+                className="h-48 w-full rounded-xl object-cover transition-all duration-500 
+                ease-in-out group-hover:brightness-110"
+                src={image}
+                alt={`item-${index + 1}`}
+              />
+            </div>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );

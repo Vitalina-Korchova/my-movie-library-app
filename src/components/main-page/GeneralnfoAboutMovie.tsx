@@ -19,10 +19,10 @@ export default function GeneralInfoMovie() {
           jrofjref fjsfjerof r dsof fj sf/
         </span>
         <button
-          className="text-black bg-yellow-400 py-1.5 px-2.5 flex justify-start self-start
-          font-semibold rounded-lg text-sm items-center"
+          className="text-black bg-yellow-400 py-2.5 px-3 flex justify-start self-start
+          font-medium rounded-lg text-sm items-center"
         >
-          <i className="fa fa-play text-xs pe-2"></i>
+          <i className="fa fa-play  pe-2"></i>
           Watch now
         </button>
       </div>
