@@ -19,6 +19,7 @@ export default function App() {
     "./test-pic-swiper/item3.jpg",
     "./test-pic-swiper/item4.jpg",
     "./test-pic-swiper/item5.jpg",
+    "https://m.media-amazon.com/images/M/MV5BZGQzZjY1MGItYmVjZS00ZmFkLWIwYzYtZDg4ODBjYzE5NzU2XkEyXkFqcGc@._V1_SX300.jpg",
     "./test-pic-swiper/item6.jpg",
     "./test-pic-swiper/item7.jpg",
     "./test-pic-swiper/item8.jpg",
@@ -33,11 +34,12 @@ export default function App() {
   return (
     <div className="relative w-full h-full py-3 px-7 overflow-visible">
       {/* Кнопки для стрілок */}
-      <div className="absolute top-0 left-0 ">
+      <div className="absolute top-0 left-0  ">
         <div className="flex ms-3.5 space-x-4 w-full px-6">
           <button
             ref={prevRef}
-            className="bg-black text-white border-[1px] border-gray-500 px-4 py-2 rounded"
+            className="bg-black text-white border-[1px] border-gray-500
+             px-4 py-2 rounded"
           >
             <i className="fa fa-chevron-left"></i>
           </button>
@@ -89,7 +91,7 @@ export default function App() {
               ease-in-out transform ${
                 index === activeSlideIndex
                   ? "scale-100 opacity-100"
-                  : "scale-[85%] opacity-65"
+                  : "scale-[85%] opacity-40"
               }`}
             >
               <img
