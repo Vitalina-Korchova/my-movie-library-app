@@ -1,119 +1,70 @@
 import { useState } from "react";
+import DropdownMenu from "./components/DropdownMenu";
 
 export default function Filters() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [title, setTitle] = useState<string>("");
+  const [year, setYear] = useState<string>("");
+  const [genre, setGenre] = useState<string | null>(null);
+  const [actor, setActor] = useState<string>("");
+  const [country, setCountry] = useState<string>("");
 
-  const arrGenres = [
-    "Action",
-    "Adventure",
-    "Comedy",
-    "Drama",
-    "Fantasy",
-    "Horror",
-    "Mystery",
-    "Romance",
-    "Sci-Fi",
-    "Thriller",
-    "Western",
-    "Biography",
-    "Crime",
-    "Documentary",
-    "Family",
-    "Historical",
-    "Musical",
-    "War",
-    "Animation",
-    "Superhero",
-    "Psychological",
-    "Sports",
-    "Noir",
-    "Satire",
-    "Survival",
-    "Paranormal",
-    "Steampunk",
-    "Cyberpunk",
-    "Dystopian",
-    "Post-apocalyptic",
-    "Martial Arts",
-    "Teen",
-    "Political",
-    "Religious",
-    "Tragedy",
-    "Urban",
-    "Space Opera",
-    "Speculative",
-    "Dark Comedy",
-    "Slice of Life",
-    "Magical Realism",
-    "Gothic",
-    "Espionage",
-    "Legal",
-    "Military",
-    "Music",
-    "Road",
-    "Epic",
-    "Fairy Tale",
-    "Coming of Age",
-    "Erotic",
-    "Travel",
-    "Heist",
-    "Suspense",
-    "Fiction",
-    "Non-Fiction",
-  ];
-
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
+  const clearFilters = () => {
+    setTitle("");
+    setYear("");
+    setGenre(null);
+    setActor("");
+    setCountry("");
   };
 
   return (
     <>
-      <div className="m-7 flex flex-row space-x-5 text-base  relative">
+      <div className="flex items-start p-7 space-x-5 justify-center">
         <input
-          className="border-[1px] border-gray-400 text-white rounded-xl p-1.5 h-12"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className="flex-1 min-w-72 border-[1px] border-gray-400 text-white rounded-xl p-1.5 h-12 outline-none focus:border-yellow-400
+              "
           type="text"
           id="searchByTitle"
           placeholder="Search by Title"
+          autoComplete="off"
         />
         <input
-          className="border-[1px] border-gray-400 text-white rounded-xl p-1.5 h-12"
+          value={year}
+          onChange={(e) => setYear(e.target.value)}
+          className=" flex-1 max-w-52 border-[1px] border-gray-400 text-white rounded-xl p-1.5 h-12 w-36 outline-none focus:border-yellow-400"
           type="text"
           id="searchByYear"
           placeholder="Search by Year"
+          autoComplete="off"
         />
-        <div className=" flex flex-col gap-0.5 ">
-          <div className="absolute">
-            <button
-              id="searchByGenres"
-              onClick={toggleDropdown}
-              className="  text-black w-[182px]  h-12 mb-1 bg-yellow-400 font-medium rounded-lg px-5 py-2.5 text-center flex justify-between items-center
-             "
-              type="button"
-            >
-              Genres
-              <i className="fa fa-caret-down ps-3"></i>
-            </button>
-
-            {isOpen && (
-              <div
-                id="dropdown"
-                className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44
-                 dark:bg-gray-700 "
-              >
-                <div className="max-h-40 overflow-y-auto">
-                  {arrGenres.map((genre, index) => (
-                    <span
-                      key={index}
-                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                    >
-                      {genre}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
+        <DropdownMenu value={genre} changeValue={setGenre} />
+        <input
+          value={actor}
+          onChange={(e) => setActor(e.target.value)}
+          className=" flex-1 max-w-[500px] border-[1px] border-gray-400 text-white rounded-xl p-1.5 h-12 outline-none focus:border-yellow-400"
+          type="text"
+          id="searchByActors"
+          placeholder="Search by Actors"
+          autoComplete="off"
+        />
+        <input
+          value={country}
+          onChange={(e) => setCountry(e.target.value)}
+          className=" flex-1 max-w-[450px]  border-[1px] border-gray-400 text-white rounded-xl p-1.5 h-12 outline-none focus:border-yellow-400"
+          type="text"
+          id="searchByCountry"
+          placeholder="Search by Country"
+          autoComplete="off"
+        />
+        <button
+          onClick={clearFilters}
+          className="text-black bg-yellow-400 py-2.5 h-12 px-3 flex justify-start self-start
+                        font-medium rounded-xl items-center cursor-pointer"
+        >
+          Clear
+          <i className="fa-solid fa-xmark ps-3 text-lg"></i>
+        </button>
       </div>
     </>
   );
