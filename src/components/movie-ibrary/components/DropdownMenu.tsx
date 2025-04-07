@@ -101,37 +101,35 @@ export default function DropdownMenu({
         className="relative flex flex-col gap-0.5 w-[180px]"
         ref={dropdownRef}
       >
-        <div className="absolute ">
-          <button
-            id="searchByGenres"
-            onClick={toggleDropdown}
-            className="text-black w-[180px] h-12 mb-1 bg-yellow-400 font-medium
+        <button
+          id="searchByGenres"
+          onClick={toggleDropdown}
+          className="text-black w-[180px] h-12 mb-1 bg-yellow-400 font-medium
                   rounded-lg px-5 py-2.5 text-center flex justify-between items-center cursor-pointer"
-            type="button"
-          >
-            {value || "Genres"}
-            <i className="fa fa-caret-down ps-3"></i>
-          </button>
+          type="button"
+        >
+          {value || "Genres"}
+          <i className="fa fa-caret-down ps-3"></i>
+        </button>
 
-          {isOpen && (
-            <div
-              id="dropdown"
-              className="z-10 bg-black rounded-lg shadow-sm w-44"
-            >
-              <div className="max-h-40 overflow-y-auto custom-scrollbar">
-                {arrGenres.map((genre, index) => (
-                  <span
-                    key={index}
-                    onClick={() => handleSelectGenre(genre)}
-                    className="block text-white px-4 rounded-lg py-2 cursor-pointer hover:bg-gray-800 hover:text-yellow-400"
-                  >
-                    {genre}
-                  </span>
-                ))}
-              </div>
+        {isOpen && (
+          <div
+            id="dropdown"
+            className="absolute top-full left-0 z-10 bg-black rounded-lg shadow-sm w-44 "
+          >
+            <div className="max-h-40 overflow-y-auto custom-scrollbar ">
+              {arrGenres.map((genre, index) => (
+                <span
+                  key={index}
+                  onClick={() => handleSelectGenre(genre)}
+                  className="block text-white px-4 rounded-lg py-2 cursor-pointer hover:bg-gray-800 hover:text-yellow-400"
+                >
+                  {genre}
+                </span>
+              ))}
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </>
   );
