@@ -39,13 +39,16 @@ export default function App() {
           <button
             ref={prevRef}
             className="bg-black text-white border-[1px] border-gray-500
-             px-4 py-2 rounded cursor-pointer"
+             px-4 py-2 rounded cursor-pointer transition-all duration-300 ease-in 
+             hover:shadow-xs hover:shadow-amber-50"
           >
             <i className="fa fa-chevron-left"></i>
           </button>
           <button
             ref={nextRef}
-            className="bg-black text-white border-[1px] border-gray-500 px-4 py-2 rounded cursor-pointer"
+            className="bg-black text-white border-[1px] border-gray-500 px-4
+             py-2 rounded cursor-pointer transition-all duration-300 ease-in 
+             hover:shadow-xs hover:shadow-amber-50"
           >
             <i className="fa fa-chevron-right"></i>
           </button>

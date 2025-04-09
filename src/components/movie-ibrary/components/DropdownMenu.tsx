@@ -115,7 +115,7 @@ export default function DropdownMenu({
         {isOpen && (
           <div
             id="dropdown"
-            className="absolute top-full left-0 z-10 bg-black rounded-lg shadow-sm w-44 "
+            className="absolute top-full left-0 z-10 bg-black rounded-lg shadow-sm w-44  "
           >
             <div className="max-h-40 overflow-y-auto custom-scrollbar ">
               {arrGenres.map((genre, index) => (

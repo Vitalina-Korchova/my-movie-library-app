@@ -4,13 +4,15 @@ import Logo from "./Logo";
 export default function NavPage() {
   const location = useLocation();
 
-  const isActive = (path) => location.pathname === path;
+  const isActive = (path: string): boolean => location.pathname === path;
 
   return (
     <>
-      <div className="relative flex flex-row py-5 ps-8 pe-24 justify-between bg-none items-center">
+      <div className="relative flex flex-row py-5 px-10 justify-between bg-none items-center">
         <div className=" flex flex-row w-full justify-between items-center">
-          <Logo />
+          <Link to="/">
+            <Logo />
+          </Link>
           <div className="flex flex-row space-x-10">
             <Link to="/" className="relative group">
               <span

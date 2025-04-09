@@ -27,7 +27,7 @@ export default function Filters() {
              hover:border-yellow-400 "
           type="text"
           id="searchByTitle"
-          placeholder="Search by Title"
+          placeholder="Search by title..."
           autoComplete="off"
         />
         <input
@@ -37,7 +37,7 @@ export default function Filters() {
           rounded-xl p-1.5 h-12 w-36 outline-none focus:border-yellow-400 hover:border-yellow-400"
           type="text"
           id="searchByYear"
-          placeholder="Search by Year"
+          placeholder="Search by year"
           autoComplete="off"
         />
         <DropdownMenu value={genre} changeValue={setGenre} />
@@ -48,7 +48,7 @@ export default function Filters() {
            rounded-xl p-1.5 h-12 outline-none focus:border-yellow-400 hover:border-yellow-400"
           type="text"
           id="searchByActors"
-          placeholder="Search by Actors"
+          placeholder="Search by actors"
           autoComplete="off"
         />
         <input
@@ -58,13 +58,13 @@ export default function Filters() {
           rounded-xl p-1.5 h-12 outline-none focus:border-yellow-400 hover:border-yellow-400"
           type="text"
           id="searchByCountry"
-          placeholder="Search by Country"
+          placeholder="Search by country"
           autoComplete="off"
         />
         <button
           onClick={clearFilters}
           className="text-black bg-yellow-400 py-2.5 h-12 px-3 flex justify-start self-start
-                        font-medium rounded-xl items-center cursor-pointer"
+                        font-medium rounded-xl items-center cursor-pointer hover:bg-amber-400"
         >
           Clear
           <i className="fa-solid fa-xmark ps-3 text-lg"></i>
