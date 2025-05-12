@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* @theme {
+  --breakpoint-smCus: 2500px;
+} */
+
 /* custom scrollbar */
 .custom-scrollbar {
   scrollbar-width: thin;
@@ -25,5 +29,34 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* custom scrollbar add-movie */
+
+.custom-scrollbar-add-movie {
+  scrollbar-width: thin;
+  scrollbar-color: #facc15 #272727;
+}
+
+.custom-scrollbar-add-movie::-webkit-scrollbar {
+  width: 3px;
+}
+
+.custom-scrollbar-add-movie::-webkit-scrollbar-track {
+  background: #272727;
+  border-radius: 10px;
+}
+
+.custom-scrollbar-add-movie::-webkit-scrollbar-thumb {
+  background: #ff9800;
+  border-radius: 10px;
+}
+
+.custom-scrollbar-add-movie::-webkit-scrollbar-thumb:hover {
+  background: #ff9800;
+}
+
+.custom-scrollbar-add-movie::-webkit-scrollbar-button {
   display: none;
 }
