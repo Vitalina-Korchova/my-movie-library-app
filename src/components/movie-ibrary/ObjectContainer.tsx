@@ -1,59 +1,46 @@
+import { useGetMoviesQuery } from "../../store/movie/movie.api";
 import MovieObjectFilter from "./components/MovieObjectFilter";
-const arrPhotoTitle = [
-  {
-    "The name title1": "./test-pic-swiper/item1.jpg",
-  },
-  {
-    "The name title2": "./test-pic-swiper/item2.jpg",
-  },
-  {
-    "The name title3": "./test-pic-swiper/item3.jpg",
-  },
-  {
-    "The name title4": "./test-pic-swiper/item4.jpg",
-  },
-  {
-    "The name title5": "./test-pic-swiper/item5.jpg",
-  },
-  {
-    "The name title6": "./test-pic-swiper/item6.jpg",
-  },
-  {
-    "The name title7": "./test-pic-swiper/item7.jpg",
-  },
-  {
-    "The name title1": "./test-pic-swiper/item1.jpg",
-  },
-  {
-    "The name title2": "./test-pic-swiper/item2.jpg",
-  },
-  {
-    "The name title3": "./test-pic-swiper/item3.jpg",
-  },
-  {
-    "The name title4": "./test-pic-swiper/item4.jpg",
-  },
-  {
-    "The name title5": "./test-pic-swiper/item5.jpg",
-  },
-  {
-    "The name title6": "./test-pic-swiper/item6.jpg",
-  },
-  {
-    "The name title7": "./test-pic-swiper/item7.jpg",
-  },
-];
+
+interface IMovieLibrary {
+  id: string;
+  title: string;
+  image: string;
+}
 
 export default function ObjectContainer() {
+  const { data, isLoading, error } = useGetMoviesQuery("Man");
+
+  const movies: IMovieLibrary[] =
+    data?.map((movie: any) => ({
+      id: movie.imdbID,
+      title: movie.Title,
+      image: movie.Poster,
+    })) || [];
+
+  // console.log(movies);
+
   return (
     <>
-      <div className=" m-7 flex flex-row gap-16 flex-wrap items-center justify-center">
-        {arrPhotoTitle.map((item, index) => {
-          const [title, pathImg] = Object.entries(item)[0];
-          return (
-            <MovieObjectFilter key={index} pathImg={pathImg} title={title} />
-          );
-        })}
+      <div className="m-7 flex flex-row gap-16 flex-wrap items-start justify-center">
+        {isLoading && <div className="text-white text-xl">Loading...</div>}
+
+        {error && (
+          <div className="text-red-500 text-xl">
+            Error while loading movies!
+          </div>
+        )}
+
+        {!isLoading && !error && movies.length > 0 && (
+          <>
+            {movies.map((item, index) => (
+              <MovieObjectFilter
+                key={index}
+                pathImg={item.image}
+                title={item.title}
+              />
+            ))}
+          </>
+        )}
       </div>
     </>
   );
