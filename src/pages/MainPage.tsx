@@ -1,7 +1,36 @@
 import NavPage from "../components/navigation/NavPage";
 import GeneralInfoMovie from "../components/main-page/GeneralnfoAboutMovie";
 import Slider from "../components/main-page/Slider";
+import { useGetMoviesHomePageQuery } from "../store/movie/movie.api";
+import { IMovie } from "../store/movie/movie.type";
 export default function MainPage() {
+  const {
+    data: data1,
+    isLoading: loading1,
+    error: error1,
+  } = useGetMoviesHomePageQuery({
+    search: "Life",
+    page: 1,
+  });
+  const {
+    data: data2,
+    isLoading: loading2,
+    error: error2,
+  } = useGetMoviesHomePageQuery({
+    search: "Sky",
+    page: 2,
+  });
+
+  const movies: IMovie[] = [
+    ...(data1?.Search || []),
+    ...(data2?.Search || []),
+  ].map((movie: any) => ({
+    id: movie.imdbID,
+    image: movie.Poster,
+  }));
+
+  console.log(movies);
+
   return (
     <>
       <div className="relative w-full flex flex-col min-h-screen z-0">

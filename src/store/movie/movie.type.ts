@@ -1,15 +1,14 @@
 export interface IMovie {
-  id: string;
-  title: string;
-  year: number;
-  generalRating: number;
-  userRating: number;
-  runtime: number;
-  description: string;
+  id?: string;
+  title?: string;
+  year?: number;
+  generalRating?: number;
+  userRating?: number;
+  runtime?: number;
+  description?: string;
   country?: string;
   type?: string;
-  image: string;
-  website: string;
+  image?: string;
 }
 
 export interface OMDBResponse {
@@ -17,4 +16,12 @@ export interface OMDBResponse {
   totalResults: string;
   Response: "True" | "False";
   Error?: string;
+}
+
+export interface MovieLibraryState {
+  library: IMovieId[];
+}
+
+export interface IMovieId {
+  id: string;
 }

@@ -10,8 +10,7 @@ export default function GeneralInfoMovie() {
         <div className="flex flex-row gap-1 text-white text-sm">
           <span>Fantasy | </span>
           <span>Drama | </span>
-          <span>2021 | </span>
-          <span className="font-bold">Your rating: 8 </span>
+          <span>2021</span>
           <span>| General rating: 7 | </span>
           <span>1hour 20min </span>
         </div>
