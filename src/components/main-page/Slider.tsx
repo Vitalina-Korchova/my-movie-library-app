@@ -7,30 +7,16 @@ import "swiper/css/navigation";
 
 // import required modules
 import { Navigation } from "swiper/modules";
+import { MovieObjectRecommendation } from "../../store/movie/movie.type";
 
-export default function App() {
+type SliderProps = {
+  movies: MovieObjectRecommendation[];
+};
+
+export default function Slider({ movies }: SliderProps) {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
-  const [activeSlideIndex, setActiveSlideIndex] = useState(5);
-
-  const arr = [
-    "./test-pic-swiper/item1.jpg",
-    "./test-pic-swiper/item2.jpg",
-    "./test-pic-swiper/item3.jpg",
-    "./test-pic-swiper/item4.jpg",
-    "./test-pic-swiper/item5.jpg",
-    "https://m.media-amazon.com/images/M/MV5BZGQzZjY1MGItYmVjZS00ZmFkLWIwYzYtZDg4ODBjYzE5NzU2XkEyXkFqcGc@._V1_SX300.jpg",
-    "./test-pic-swiper/item6.jpg",
-    "./test-pic-swiper/item7.jpg",
-    "./test-pic-swiper/item8.jpg",
-    "./test-pic-swiper/item9.jpg",
-    "./test-pic-swiper/item10.jpg",
-    "./test-pic-swiper/item11.jpg",
-    "./test-pic-swiper/item12.jpg",
-    "./test-pic-swiper/item13.jpg",
-    "./test-pic-swiper/item14.jpg",
-    "./test-pic-swiper/item15.jpg",
-  ];
+  const [activeSlideIndex, setActiveSlideIndex] = useState(4);
   return (
     <div className="relative w-full h-full py-3 px-7 overflow-visible">
       {/* Кнопки для стрілок */}
@@ -73,7 +59,7 @@ export default function App() {
           }
         }}
         onSlideChange={(swiper) => {
-          setActiveSlideIndex((swiper.realIndex + 5) % arr.length);
+          setActiveSlideIndex((swiper.realIndex + 4) % movies.length);
         }}
         breakpoints={{
           1536: {
@@ -83,7 +69,7 @@ export default function App() {
         modules={[Navigation]}
         className="w-full h-full mt-8 overflow-visible"
       >
-        {arr.map((image, index) => (
+        {movies.map((movie, index) => (
           <SwiperSlide
             key={index}
             className="group relative overflow-hidden rounded-xl transition-all
@@ -100,7 +86,7 @@ export default function App() {
               <img
                 className="h-48 w-full rounded-xl object-cover transition-all duration-500 
                 ease-in-out group-hover:brightness-110"
-                src={image}
+                src={movie.image}
                 alt={`item-${index + 1}`}
               />
             </div>

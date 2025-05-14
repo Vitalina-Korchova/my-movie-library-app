@@ -2,34 +2,30 @@ import NavPage from "../components/navigation/NavPage";
 import GeneralInfoMovie from "../components/main-page/GeneralnfoAboutMovie";
 import Slider from "../components/main-page/Slider";
 import { useGetMoviesHomePageQuery } from "../store/movie/movie.api";
-import { IMovie } from "../store/movie/movie.type";
+import { MovieObjectRecommendation } from "../store/movie/movie.type";
+import { useState } from "react";
 export default function MainPage() {
+  const [active, setActive] = useState<string>("");
   const {
     data: data1,
-    isLoading: loading1,
-    error: error1,
+    isLoading: loading,
+    error: error,
   } = useGetMoviesHomePageQuery({
-    search: "Life",
+    search: "Pirates",
     page: 1,
   });
-  const {
-    data: data2,
-    isLoading: loading2,
-    error: error2,
-  } = useGetMoviesHomePageQuery({
-    search: "Sky",
+  const { data: data2 } = useGetMoviesHomePageQuery({
+    search: "Moon",
     page: 2,
   });
 
-  const movies: IMovie[] = [
-    ...(data1?.Search || []),
-    ...(data2?.Search || []),
+  const movies: MovieObjectRecommendation[] = [
+    ...(data1 || []),
+    ...(data2 || []),
   ].map((movie: any) => ({
     id: movie.imdbID,
     image: movie.Poster,
   }));
-
-  console.log(movies);
 
   return (
     <>
@@ -43,7 +39,13 @@ export default function MainPage() {
         <NavPage />
 
         <GeneralInfoMovie />
-        <Slider />
+        {loading && <div className="text-white text-xl">Loading...</div>}
+        {error && (
+          <div className="text-red-500 text-xl">
+            Error while loading movies!
+          </div>
+        )}
+        {!loading && !error && movies.length > 0 && <Slider movies={movies} />}
       </div>
     </>
   );

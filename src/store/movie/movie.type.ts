@@ -25,3 +25,8 @@ export interface MovieLibraryState {
 export interface IMovieId {
   id: string;
 }
+
+export interface MovieObjectRecommendation {
+  id: string;
+  image: string;
+}
