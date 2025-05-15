@@ -5,10 +5,11 @@ export interface IMovie {
   generalRating?: number;
   userRating?: number;
   runtime?: number;
-  description?: string;
+  plot?: string;
   country?: string;
   type?: string;
   image?: string;
+  genre?: string[];
 }
 
 export interface OMDBResponse {

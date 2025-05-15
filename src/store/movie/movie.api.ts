@@ -13,7 +13,8 @@ export const movieApi = createApi({
       query: (imdbID) => `?apikey=f9dc3e10&i=${imdbID}`,
     }),
     getMoviesHomePage: build.query<IMovie[], { search: string; page: number }>({
-      query: ({ search, page }) => `?apikey=f9dc3e10&s=${search}&page=${page}`,
+      query: ({ search, page }) =>
+        `?apikey=f9dc3e10&s=${search}&page=${page}&type=movie`,
       transformResponse: (response: OMDBResponse) => response.Search || [],
     }),
   }),

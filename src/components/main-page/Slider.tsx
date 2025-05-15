@@ -11,12 +11,18 @@ import { MovieObjectRecommendation } from "../../store/movie/movie.type";
 
 type SliderProps = {
   movies: MovieObjectRecommendation[];
+  activeSlideIndex: number;
+  onSlideChange: (newIndex: number) => void;
 };
 
-export default function Slider({ movies }: SliderProps) {
+export default function Slider({
+  movies,
+  activeSlideIndex,
+  onSlideChange,
+}: SliderProps) {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
-  const [activeSlideIndex, setActiveSlideIndex] = useState(4);
+
   return (
     <div className="relative w-full h-full py-3 px-7 overflow-visible">
       {/* Кнопки для стрілок */}
@@ -59,7 +65,8 @@ export default function Slider({ movies }: SliderProps) {
           }
         }}
         onSlideChange={(swiper) => {
-          setActiveSlideIndex((swiper.realIndex + 4) % movies.length);
+          const newIndex = (swiper.realIndex + 4) % movies.length;
+          onSlideChange(newIndex);
         }}
         breakpoints={{
           1536: {

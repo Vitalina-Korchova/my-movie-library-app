@@ -1,11 +1,17 @@
 import NavPage from "../components/navigation/NavPage";
 import GeneralInfoMovie from "../components/main-page/GeneralnfoAboutMovie";
 import Slider from "../components/main-page/Slider";
-import { useGetMoviesHomePageQuery } from "../store/movie/movie.api";
-import { MovieObjectRecommendation } from "../store/movie/movie.type";
-import { useState } from "react";
+import {
+  useGetMovieByIdQuery,
+  useGetMoviesHomePageQuery,
+} from "../store/movie/movie.api";
+import { IMovie, MovieObjectRecommendation } from "../store/movie/movie.type";
+import { useEffect, useState } from "react";
 export default function MainPage() {
-  const [active, setActive] = useState<string>("");
+  const [active, setActive] = useState<number>(4);
+  const [activeMovieId, setActiveMovieId] = useState<string>("");
+
+  //запити на витяг 20 фільмів апі
   const {
     data: data1,
     isLoading: loading,
@@ -14,11 +20,13 @@ export default function MainPage() {
     search: "Pirates",
     page: 1,
   });
+
   const { data: data2 } = useGetMoviesHomePageQuery({
-    search: "Moon",
-    page: 2,
+    search: "Fast",
+    page: 1,
   });
 
+  //формування масиву з 20 фільмів айді і фото
   const movies: MovieObjectRecommendation[] = [
     ...(data1 || []),
     ...(data2 || []),
@@ -27,25 +35,79 @@ export default function MainPage() {
     image: movie.Poster,
   }));
 
+  //встановлення активного айді
+  useEffect(() => {
+    if (movies.length > 0) {
+      const activeMovie = movies[active % movies.length];
+      setActiveMovieId(activeMovie.id);
+    }
+  }, [active, movies]);
+
+  const {
+    data: dataId,
+    isLoading: loadingId,
+    error: errorId,
+  } = useGetMovieByIdQuery(activeMovieId);
+
+  console.log(dataId);
+
+  const movieObject: IMovie = {
+    id: dataId?.imdbID,
+    image: dataId?.Poster
+      ? `${dataId.Poster.split("_")[0]}_SX600.jpg`
+      : undefined, //більша роздільна здатність
+    title: dataId?.Title,
+    genre: dataId?.Genre,
+    year: parseFloat(dataId?.Year),
+    generalRating: parseFloat(dataId?.imdbRating),
+    runtime: dataId?.Runtime,
+    plot: dataId?.Plot,
+  };
   return (
     <>
-      <div className="relative w-full flex flex-col min-h-screen z-0">
-        <div className="absolute inset-y-0 right-0 w-1/2 bg-[url('/kaiser.jpg')] bg-cover bg-center"></div>
-        <div className="absolute inset-y-0 left-0 w-1/2 bg-[url('/kaiser.jpg')] bg-cover bg-center scale-x-[-1]"></div>
+      {loadingId && <div className="text-white text-xl">Loading...</div>}
+      {errorId && <div className="text-red-700 text-xl">Errror...</div>}
+      <div className="relative w-full flex flex-col min-h-screen z-0 bg-black">
+        <div
+          className="absolute inset-y-0 right-0 w-1/2  bg-cover bg-center"
+          style={{
+            backgroundImage: `url(${movieObject.image})`,
+          }}
+        ></div>
+        <div
+          className="absolute inset-y-0 left-0 w-1/2  bg-cover bg-center scale-x-[-1]"
+          style={{
+            backgroundImage: `url(${movieObject.image})`,
+          }}
+        ></div>
 
         <div className="absolute inset-0 bg-gradient-to-r from-black/100 via-black/70 to-transparent"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-transparent to-black/50"></div>
 
         <NavPage />
 
-        <GeneralInfoMovie />
+        <GeneralInfoMovie
+          title={movieObject.title}
+          genres={movieObject.genre}
+          year={movieObject.year}
+          rating={movieObject.generalRating}
+          runtime={movieObject.runtime}
+          plot={movieObject.plot}
+        />
+
         {loading && <div className="text-white text-xl">Loading...</div>}
         {error && (
           <div className="text-red-500 text-xl">
             Error while loading movies!
           </div>
         )}
-        {!loading && !error && movies.length > 0 && <Slider movies={movies} />}
+        {!loading && !error && movies.length > 0 && (
+          <Slider
+            movies={movies}
+            activeSlideIndex={active}
+            onSlideChange={(newIndex) => setActive(newIndex)}
+          />
+        )}
       </div>
     </>
   );
