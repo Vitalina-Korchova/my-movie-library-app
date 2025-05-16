@@ -1,12 +1,12 @@
 import { MdPlayArrow } from "react-icons/md";
 
 type MovieInfoIntro = {
-  title: string;
-  genres: string[];
-  year: number;
-  rating: number;
-  runtime: string;
-  plot: string;
+  title: string | undefined;
+  genres: string[] | undefined;
+  year: number | undefined;
+  rating: number | undefined;
+  runtime: string | undefined;
+  plot: string | undefined;
 };
 export default function GeneralInfoMovie({
   title,
@@ -18,7 +18,7 @@ export default function GeneralInfoMovie({
 }: MovieInfoIntro) {
   return (
     <>
-      <div className="z-10 flex flex-col gap-3.5 m-10">
+      <div className="z-10 flex flex-col gap-3.5 ms-10 mb-10">
         <span className="text-white font-semibold text-5xl max-w-[870px]">
           {title}
         </span>

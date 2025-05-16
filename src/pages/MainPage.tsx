@@ -31,6 +31,7 @@ export default function MainPage() {
     ...(data1 || []),
     ...(data2 || []),
   ].map((movie: any) => ({
+    //виправити
     id: movie.imdbID,
     image: movie.Poster,
   }));
@@ -49,20 +50,19 @@ export default function MainPage() {
     error: errorId,
   } = useGetMovieByIdQuery(activeMovieId);
 
-  console.log(dataId);
-
   const movieObject: IMovie = {
-    id: dataId?.imdbID,
-    image: dataId?.Poster
+    imdbID: dataId?.imdbID,
+    Poster: dataId?.Poster
       ? `${dataId.Poster.split("_")[0]}_SX600.jpg`
-      : undefined, //більша роздільна здатність
-    title: dataId?.Title,
-    genre: dataId?.Genre,
-    year: parseFloat(dataId?.Year),
-    generalRating: parseFloat(dataId?.imdbRating),
-    runtime: dataId?.Runtime,
-    plot: dataId?.Plot,
+      : undefined,
+    Title: dataId?.Title,
+    Genre: dataId?.Genre,
+    Year: dataId?.Year,
+    imdbRating: dataId?.imdbRating,
+    Runtime: dataId?.Runtime,
+    Plot: dataId?.Plot,
   };
+
   return (
     <>
       {loadingId && <div className="text-white text-xl">Loading...</div>}
@@ -71,13 +71,13 @@ export default function MainPage() {
         <div
           className="absolute inset-y-0 right-0 w-1/2  bg-cover bg-center"
           style={{
-            backgroundImage: `url(${movieObject.image})`,
+            backgroundImage: `url(${movieObject.Poster})`,
           }}
         ></div>
         <div
           className="absolute inset-y-0 left-0 w-1/2  bg-cover bg-center scale-x-[-1]"
           style={{
-            backgroundImage: `url(${movieObject.image})`,
+            backgroundImage: `url(${movieObject.Poster})`,
           }}
         ></div>
 
@@ -87,12 +87,12 @@ export default function MainPage() {
         <NavPage />
 
         <GeneralInfoMovie
-          title={movieObject.title}
-          genres={movieObject.genre}
-          year={movieObject.year}
-          rating={movieObject.generalRating}
-          runtime={movieObject.runtime}
-          plot={movieObject.plot}
+          title={movieObject.Title}
+          genres={movieObject.Genre}
+          year={movieObject.Year}
+          rating={movieObject.imdbRating}
+          runtime={movieObject.Runtime}
+          plot={movieObject.Plot}
         />
 
         {loading && <div className="text-white text-xl">Loading...</div>}

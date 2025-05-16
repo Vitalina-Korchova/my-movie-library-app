@@ -1,15 +1,15 @@
 export interface IMovie {
-  id?: string;
-  title?: string;
-  year?: number;
-  generalRating?: number;
+  imdbID?: string;
+  Title?: string;
+  Year?: number;
+  imdbRating?: number;
   userRating?: number;
-  runtime?: number;
-  plot?: string;
-  country?: string;
-  type?: string;
-  image?: string;
-  genre?: string[];
+  Runtime?: string;
+  Plot?: string;
+  Country?: string;
+  Type?: string;
+  Poster?: string;
+  Genre?: string[];
 }
 
 export interface OMDBResponse {

@@ -1,6 +1,8 @@
 import NavPage from "../components/navigation/NavPage";
 import FoundMovieObject from "../components/add-movie/FoundMovieObject";
 import DetailsMovieObject from "../components/add-movie/DetailsMovieObject";
+import { MdManageSearch } from "react-icons/md";
+import { FaArrowTurnUp } from "react-icons/fa6";
 
 const arrFoundData = [
   {
@@ -69,7 +71,11 @@ export default function AddMoviePage() {
             </button>
 
             <div className="h-[610px] overflow-y-auto mt-8 custom-scrollbar-add-movie">
-              {arrFoundData.map((item, index) => {
+              <FaArrowTurnUp className="text-[140px] text-yellow-400 text-center m-auto" />
+              <h1 className="text-3xl text-yellow-400 font-bold text-center my-5">
+                Try to write the title of movie...
+              </h1>
+              {/* {arrFoundData.map((item, index) => {
                 const { imgUrl, title, year, rating } = item;
                 return (
                   <FoundMovieObject
@@ -80,7 +86,7 @@ export default function AddMoviePage() {
                     rating={rating}
                   />
                 );
-              })}
+              })} */}
             </div>
 
             {/* <h1>No result</h1> */}
@@ -92,8 +98,12 @@ export default function AddMoviePage() {
             >
               <i className="fa-solid fa-xmark text-lg text-black "></i>
             </button>
-            <DetailsMovieObject />
-            {/* <h1>No result</h1> */}
+            {/* <DetailsMovieObject /> */}
+
+            <MdManageSearch className="text-[160px] text-yellow-400 text-center m-auto" />
+            <h1 className="text-4xl text-yellow-400 font-bold text-center my-5">
+              No result
+            </h1>
           </div>
         </div>
       </div>
