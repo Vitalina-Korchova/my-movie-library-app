@@ -2,49 +2,30 @@ import NavPage from "../components/navigation/NavPage";
 import FoundMovieObject from "../components/add-movie/FoundMovieObject";
 import DetailsMovieObject from "../components/add-movie/DetailsMovieObject";
 import { MdManageSearch } from "react-icons/md";
-import { FaArrowTurnUp } from "react-icons/fa6";
-
-const arrFoundData = [
-  {
-    imgUrl: "./test-pic-swiper/item7.jpg",
-    title: "Title1",
-    year: "2019",
-    rating: "8",
-  },
-  {
-    imgUrl: "./test-pic-swiper/item4.jpg",
-    title: "Title2",
-    year: "2010",
-    rating: "2",
-  },
-  {
-    imgUrl: "./test-pic-swiper/item1.jpg",
-    title: "Title3",
-    year: "2020",
-    rating: "8",
-  },
-  {
-    imgUrl: "./test-pic-swiper/item8.jpg",
-    title: "Title4",
-    year: "2019",
-    rating: "8",
-  },
-
-  {
-    imgUrl: "./test-pic-swiper/item2.jpg",
-    title: "Title5",
-    year: "2012",
-    rating: "5",
-  },
-  {
-    imgUrl: "./test-pic-swiper/item3.jpg",
-    title: "Title1",
-    year: "2022",
-    rating: "8",
-  },
-];
+import { AiOutlineSelect } from "react-icons/ai";
+import { useState } from "react";
+import { useGetMoviesQuery } from "../store/movie/movie.api";
+import { IMovie } from "../store/movie/movie.type";
 
 export default function AddMoviePage() {
+  const [searchValue, setSearchValue] = useState("");
+  const [selectedMovieId, setSelectedMovieId] = useState<string>("");
+  const { data, isLoading, error } = useGetMoviesQuery(searchValue);
+
+  const movieObjects =
+    data?.map((movie) => ({
+      imdbID: movie.imdbID,
+      Poster: movie.Poster
+        ? `${movie.Poster.split("_")[0]}_SX600.jpg`
+        : undefined,
+      Title: movie.Title,
+      Year: movie.Year,
+      Type: movie.Type,
+    })) ?? [];
+
+  const clearAll = () => {
+    setSearchValue("");
+  };
   return (
     <>
       <div className="flex flex-col bg-stone-900 w-full bg-cover min-h-screen">
@@ -57,6 +38,8 @@ export default function AddMoviePage() {
           id="searchMovieAdd"
           placeholder="Add movie by title..."
           autoComplete="off"
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
         />
         <div
           className="flex flex-row gap-5 text-white mx-10 my-5 items-start justify-center 
@@ -64,6 +47,7 @@ export default function AddMoviePage() {
         >
           <div className="bg-neutral-800 p-5  w-2/3 rounded-lg relative">
             <button
+              onClick={clearAll}
               className="bg-white px-2 py-1 rounded-full flex items-center justify-center 
             absolute top-4 right-4 cursor-pointer  transition-all duration-200 ease-in hover:scale-110"
             >
@@ -71,25 +55,33 @@ export default function AddMoviePage() {
             </button>
 
             <div className="h-[610px] overflow-y-auto mt-8 custom-scrollbar-add-movie">
-              <FaArrowTurnUp className="text-[140px] text-yellow-400 text-center m-auto" />
-              <h1 className="text-3xl text-yellow-400 font-bold text-center my-5">
-                Try to write the title of movie...
-              </h1>
-              {/* {arrFoundData.map((item, index) => {
-                const { imgUrl, title, year, rating } = item;
-                return (
-                  <FoundMovieObject
-                    key={index}
-                    imgUrl={imgUrl}
-                    title={title}
-                    year={year}
-                    rating={rating}
-                  />
-                );
-              })} */}
+              {isLoading && (
+                <div className="text-white text-xl">Loading...</div>
+              )}
+              {error && <div className="text-red-700 text-xl">Eror...</div>}
+              {searchValue === "" ? (
+                <>
+                  <MdManageSearch className="text-[160px] text-yellow-400 text-center m-auto" />
+                  <h1 className="text-4xl text-yellow-400 font-bold text-center my-5">
+                    No result
+                  </h1>
+                </>
+              ) : (
+                <>
+                  {movieObjects.map((movie, index) => {
+                    return (
+                      <FoundMovieObject
+                        key={index}
+                        imgUrl={movie.Poster}
+                        title={movie.Title}
+                        year={movie.Year}
+                        type={movie.Type}
+                      />
+                    );
+                  })}
+                </>
+              )}
             </div>
-
-            {/* <h1>No result</h1> */}
           </div>
           <div className="bg-neutral-800 p-5 w-full rounded-lg relative h-[680px]">
             <button
@@ -100,9 +92,9 @@ export default function AddMoviePage() {
             </button>
             {/* <DetailsMovieObject /> */}
 
-            <MdManageSearch className="text-[160px] text-yellow-400 text-center m-auto" />
+            <AiOutlineSelect className="text-[140px] text-yellow-400 text-center m-auto mt-14" />
             <h1 className="text-4xl text-yellow-400 font-bold text-center my-5">
-              No result
+              No selected movie
             </h1>
           </div>
         </div>

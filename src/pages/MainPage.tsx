@@ -17,12 +17,12 @@ export default function MainPage() {
     isLoading: loading,
     error: error,
   } = useGetMoviesHomePageQuery({
-    search: "Pirates",
+    search: "Man",
     page: 1,
   });
 
   const { data: data2 } = useGetMoviesHomePageQuery({
-    search: "Fast",
+    search: "Dark",
     page: 1,
   });
 
@@ -66,7 +66,7 @@ export default function MainPage() {
   return (
     <>
       {loadingId && <div className="text-white text-xl">Loading...</div>}
-      {errorId && <div className="text-red-700 text-xl">Errror...</div>}
+      {errorId && <div className="text-red-700 text-xl">Error...</div>}
       <div className="relative w-full flex flex-col min-h-screen z-0 bg-black">
         <div
           className="absolute inset-y-0 right-0 w-1/2  bg-cover bg-center"

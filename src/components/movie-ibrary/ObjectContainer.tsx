@@ -11,7 +11,7 @@ interface IMovieLibrary {
 }
 
 export default function ObjectContainer() {
-  const { data, isLoading, error } = useGetMoviesQuery("Man");
+  const { data, isLoading, error } = useGetMoviesQuery("Pirates");
   const dispatch = useDispatch();
 
   const movies: IMovieLibrary[] = useMemo(() => {
