@@ -4,28 +4,52 @@ import DetailsMovieObject from "../components/add-movie/DetailsMovieObject";
 import { MdManageSearch } from "react-icons/md";
 import { AiOutlineSelect } from "react-icons/ai";
 import { useState } from "react";
-import { useGetMoviesQuery } from "../store/movie/movie.api";
+import {
+  useGetMovieByIdQuery,
+  useGetMoviesQuery,
+} from "../store/movie/movie.api";
 import { IMovie } from "../store/movie/movie.type";
 
 export default function AddMoviePage() {
   const [searchValue, setSearchValue] = useState("");
   const [selectedMovieId, setSelectedMovieId] = useState<string>("");
+
   const { data, isLoading, error } = useGetMoviesQuery(searchValue);
+  const {
+    data: dataId,
+    isLoading: loadingId,
+    error: errorId,
+  } = useGetMovieByIdQuery(selectedMovieId);
 
   const movieObjects =
     data?.map((movie) => ({
       imdbID: movie.imdbID,
-      Poster: movie.Poster
-        ? `${movie.Poster.split("_")[0]}_SX600.jpg`
-        : undefined,
+      Poster: movie.Poster,
       Title: movie.Title,
       Year: movie.Year,
       Type: movie.Type,
     })) ?? [];
 
+  const selectedMovieObject: IMovie = {
+    imdbID: dataId?.imdbID,
+    Poster: dataId?.Poster,
+    Title: dataId?.Title,
+    Genre: dataId?.Genre,
+    Year: dataId?.Year,
+    imdbRating: dataId?.imdbRating,
+    Runtime: dataId?.Runtime,
+    Country: dataId?.Country,
+    Plot: dataId?.Plot,
+  };
+
   const clearAll = () => {
     setSearchValue("");
   };
+
+  const clearSelectedMovie = () => {
+    setSelectedMovieId("");
+  };
+
   return (
     <>
       <div className="flex flex-col bg-stone-900 w-full bg-cover min-h-screen">
@@ -59,7 +83,7 @@ export default function AddMoviePage() {
                 <div className="text-white text-xl">Loading...</div>
               )}
               {error && <div className="text-red-700 text-xl">Eror...</div>}
-              {searchValue === "" ? (
+              {searchValue === "" || data?.length === 0 ? (
                 <>
                   <MdManageSearch className="text-[160px] text-yellow-400 text-center m-auto" />
                   <h1 className="text-4xl text-yellow-400 font-bold text-center my-5">
@@ -76,6 +100,8 @@ export default function AddMoviePage() {
                         title={movie.Title}
                         year={movie.Year}
                         type={movie.Type}
+                        imdbID={movie.imdbID}
+                        onSelect={(id) => setSelectedMovieId(id)}
                       />
                     );
                   })}
@@ -84,18 +110,38 @@ export default function AddMoviePage() {
             </div>
           </div>
           <div className="bg-neutral-800 p-5 w-full rounded-lg relative h-[680px]">
+            {loadingId && <div className="text-white text-xl">Loading...</div>}
+            {errorId && <div className="text-red-700 text-xl">Eror...</div>}
+
             <button
+              onClick={clearSelectedMovie}
               className="bg-white px-2 py-1 rounded-full flex items-center justify-center 
             absolute top-4 right-4 cursor-pointer  transition-all duration-200 ease-in hover:scale-110"
             >
               <i className="fa-solid fa-xmark text-lg text-black "></i>
             </button>
-            {/* <DetailsMovieObject /> */}
 
-            <AiOutlineSelect className="text-[140px] text-yellow-400 text-center m-auto mt-14" />
-            <h1 className="text-4xl text-yellow-400 font-bold text-center my-5">
-              No selected movie
-            </h1>
+            {selectedMovieId === "" ? (
+              <>
+                <AiOutlineSelect className="text-[140px] text-yellow-400 text-center m-auto mt-14" />
+                <h1 className="text-4xl text-yellow-400 font-bold text-center my-5">
+                  No selected movie
+                </h1>
+              </>
+            ) : (
+              <>
+                <DetailsMovieObject
+                  poster={selectedMovieObject.Poster}
+                  title={selectedMovieObject.Title}
+                  genres={selectedMovieObject.Genre}
+                  year={selectedMovieObject.Year}
+                  rating={selectedMovieObject.imdbRating}
+                  runtime={selectedMovieObject.Runtime}
+                  country={selectedMovieObject.Country}
+                  plot={selectedMovieObject.Plot}
+                />
+              </>
+            )}
           </div>
         </div>
       </div>

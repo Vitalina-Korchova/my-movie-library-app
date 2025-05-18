@@ -3,6 +3,8 @@ interface FoundMvieObjectProps {
   title: string | undefined;
   year: number | undefined;
   type: string | undefined;
+  imdbID: string | undefined;
+  onSelect: (imdbID: string | undefined) => void;
 }
 
 export default function FoundMovieObject({
@@ -10,10 +12,15 @@ export default function FoundMovieObject({
   title,
   year,
   type,
+  imdbID,
+  onSelect,
 }: FoundMvieObjectProps) {
   return (
     <>
-      <div className="py-6 px-3 flex flex-row space-x-5 cursor-pointer items-center">
+      <div
+        onClick={() => onSelect(imdbID)}
+        className="py-6 px-3 flex flex-row space-x-5 cursor-pointer items-center"
+      >
         <img src={imgUrl} alt="" className="w-16 h-24 rounded-lg" />
         <div className="flex flex-col gap-3">
           <span className="font-bold">{title}</span>
