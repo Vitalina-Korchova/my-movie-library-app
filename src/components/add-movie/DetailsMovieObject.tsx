@@ -9,6 +9,9 @@ type MovieInfoSelected = {
   runtime: string | undefined;
   country: string | undefined;
   plot: string | undefined;
+  onAddMovie: () => void;
+  onRemoveMovie: () => void;
+  checkingIdInLibrary: boolean;
 };
 
 export default function DetailsMovieObject({
@@ -20,6 +23,9 @@ export default function DetailsMovieObject({
   runtime,
   country,
   plot,
+  onAddMovie,
+  onRemoveMovie,
+  checkingIdInLibrary,
 }: MovieInfoSelected) {
   return (
     <>
@@ -42,12 +48,27 @@ export default function DetailsMovieObject({
         <div>
           <span>{plot}</span>
         </div>
-        <button
-          className=" text-black bg-yellow-400 py-2.5 px-3 flex justify-center items-center
+        {!checkingIdInLibrary ? (
+          <>
+            <button
+              onClick={onAddMovie}
+              className=" text-black bg-yellow-400 py-2.5 px-3 flex justify-center items-center
           font-semibold rounded-lg text-base cursor-pointer w-48 m-auto mt-8 hover:bg-amber-400"
-        >
-          Add to my library
-        </button>
+            >
+              Add to my library
+            </button>
+          </>
+        ) : (
+          <>
+            <button
+              onClick={onRemoveMovie}
+              className=" text-black bg-red-400 py-2.5 px-3 flex justify-center items-center
+          font-semibold rounded-lg text-base cursor-pointer w-48 m-auto mt-8 hover:bg-red-500"
+            >
+              Remove from library
+            </button>
+          </>
+        )}
       </div>
     </>
   );

@@ -9,10 +9,19 @@ import {
   useGetMoviesQuery,
 } from "../store/movie/movie.api";
 import { IMovie } from "../store/movie/movie.type";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addToLibrary,
+  checkIsInLibrary,
+  removeFromLibrary,
+} from "../store/movie/movie.slice";
+import { TypeRootState } from "../store/store";
 
 export default function AddMoviePage() {
   const [searchValue, setSearchValue] = useState("");
   const [selectedMovieId, setSelectedMovieId] = useState<string>("");
+
+  const dispatch = useDispatch();
 
   const { data, isLoading, error } = useGetMoviesQuery(searchValue);
   const {
@@ -42,6 +51,13 @@ export default function AddMoviePage() {
     Plot: dataId?.Plot,
   };
 
+  const addMovie = () => {
+    dispatch(addToLibrary({ id: selectedMovieId }));
+  };
+  const removeMovie = () => {
+    dispatch(removeFromLibrary({ id: selectedMovieId }));
+  };
+
   const clearAll = () => {
     setSearchValue("");
   };
@@ -49,6 +65,11 @@ export default function AddMoviePage() {
   const clearSelectedMovie = () => {
     setSelectedMovieId("");
   };
+
+  //перевірка чи є вже фільм обраний в бібліотеці
+  const checkingIdInLibrary = useSelector((state: TypeRootState) =>
+    checkIsInLibrary(state, selectedMovieId)
+  );
 
   return (
     <>
@@ -139,6 +160,9 @@ export default function AddMoviePage() {
                   runtime={selectedMovieObject.Runtime}
                   country={selectedMovieObject.Country}
                   plot={selectedMovieObject.Plot}
+                  onAddMovie={addMovie}
+                  onRemoveMovie={removeMovie}
+                  checkingIdInLibrary={checkingIdInLibrary}
                 />
               </>
             )}

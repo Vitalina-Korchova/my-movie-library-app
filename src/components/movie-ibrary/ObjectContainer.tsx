@@ -1,40 +1,37 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useGetMoviesQuery } from "../../store/movie/movie.api";
-import MovieObjectFilter from "./components/MovieObjectFilter";
-import { addToLibrary } from "../../store/movie/movie.slice";
-import { useEffect, useMemo } from "react";
-
-interface IMovieLibrary {
-  id: string;
-  title: string;
-  image: string;
-}
+import {
+  addToLibrary,
+  selectLibrary,
+  setInitialized,
+} from "../../store/movie/movie.slice";
+import { useEffect } from "react";
+import MovieObjectLibrary from "./components/MovieObjectFilter";
+import { TypeRootState } from "../../store/store";
 
 export default function ObjectContainer() {
+  //---------------------------------------------
+  //для демонстрації роблю 10 фільмів які будуть вдразу в моїй бібліотеці
   const { data, isLoading, error } = useGetMoviesQuery("Pirates");
   const dispatch = useDispatch();
+  const isInitialized = useSelector(
+    (state: TypeRootState) => state.movieLibrary.isInitializedMovies
+  );
 
-  const movies: IMovieLibrary[] = useMemo(() => {
-    return (
-      data?.map((movie: any) => ({
-        id: movie.imdbID,
-        title: movie.Title,
-        image: movie.Poster,
-      })) || []
-    );
-  }, [data]);
-
+  //заповнення головного масиву фільмів
   useEffect(() => {
-    if (movies.length > 0) {
-      movies.forEach((movie) => {
-        dispatch(addToLibrary({ id: movie.id }));
+    if (!isInitialized && data && Array.isArray(data)) {
+      data.forEach((movie: any) => {
+        dispatch(addToLibrary({ id: movie.imdbID }));
       });
+      dispatch(setInitialized());
     }
-  }, [movies, dispatch]);
+  }, [data, dispatch, isInitialized]);
+  //---------------------------------------------
 
-  // console.log(movies);
-
-  // console.log("Saved movie IDs:", savedMovies);
+  //головний елмент коду
+  const library = useSelector(selectLibrary);
+  console.log(library);
 
   return (
     <>
@@ -46,18 +43,9 @@ export default function ObjectContainer() {
             Error while loading movies!
           </div>
         )}
-
-        {!isLoading && !error && movies.length > 0 && (
-          <>
-            {movies.map((item, index) => (
-              <MovieObjectFilter
-                key={index}
-                pathImg={item.image}
-                title={item.title}
-              />
-            ))}
-          </>
-        )}
+        {library.map((movieId) => (
+          <MovieObjectLibrary key={movieId.id} id={movieId.id} />
+        ))}
       </div>
     </>
   );

@@ -21,6 +21,7 @@ export interface OMDBResponse {
 
 export interface MovieLibraryState {
   library: IMovieId[];
+  isInitializedMovies: boolean;
 }
 
 export interface IMovieId {
