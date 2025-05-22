@@ -1,13 +1,13 @@
 import { useGetMovieByIdQuery } from "../../../store/movie/movie.api";
-import { IMovieId } from "../../../store/movie/movie.type";
+import { IMovie } from "../../../store/movie/movie.type";
 
 type IMovieLibrary = {
   title: string | undefined;
   poster: string | undefined;
 };
 
-export default function MovieObjectLibrary(movieId: IMovieId) {
-  const { data } = useGetMovieByIdQuery(movieId.id);
+export default function MovieObjectLibrary(movieId: IMovie) {
+  const { data } = useGetMovieByIdQuery(movieId.imdbID);
   const movie: IMovieLibrary = {
     title: data?.Title,
     poster: data?.Poster,

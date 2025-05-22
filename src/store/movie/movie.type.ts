@@ -10,6 +10,8 @@ export interface IMovie {
   Type?: string;
   Poster?: string;
   Genre?: string[];
+  Actors?: string[];
+  Language?: string[];
 }
 
 export interface OMDBResponse {
@@ -20,15 +22,6 @@ export interface OMDBResponse {
 }
 
 export interface MovieLibraryState {
-  library: IMovieId[];
+  library: IMovie[];
   isInitializedMovies: boolean;
-}
-
-export interface IMovieId {
-  id: string;
-}
-
-export interface MovieObjectRecommendation {
-  id: string;
-  image: string;
 }

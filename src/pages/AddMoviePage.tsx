@@ -52,10 +52,10 @@ export default function AddMoviePage() {
   };
 
   const addMovie = () => {
-    dispatch(addToLibrary({ id: selectedMovieId }));
+    dispatch(addToLibrary({  imdbID: selectedMovieId }));
   };
   const removeMovie = () => {
-    dispatch(removeFromLibrary({ id: selectedMovieId }));
+    dispatch(removeFromLibrary({  imdbID: selectedMovieId }));
   };
 
   const clearAll = () => {

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useGetMoviesQuery } from "../../store/movie/movie.api";
+import { useGetMovieByIdQuery } from "../../store/movie/movie.api";
 import {
   addToLibrary,
   selectLibrary,
@@ -11,8 +11,12 @@ import { TypeRootState } from "../../store/store";
 
 export default function ObjectContainer() {
   //---------------------------------------------
-  //для демонстрації роблю 10 фільмів які будуть вдразу в моїй бібліотеці
-  const { data, isLoading, error } = useGetMoviesQuery("Pirates");
+  //для демонстрації роблю 5 фільмів які будуть вдразу в моїй бібліотеці
+  const { data: data1, isLoading, error } = useGetMovieByIdQuery("tt0325980");
+  const { data: data2 } = useGetMovieByIdQuery("tt0383574");
+  const { data: data3 } = useGetMovieByIdQuery("tt0449088");
+  const { data: data4 } = useGetMovieByIdQuery("tt1298650");
+  const { data: data5 } = useGetMovieByIdQuery("tt1790809");
   const dispatch = useDispatch();
   const isInitialized = useSelector(
     (state: TypeRootState) => state.movieLibrary.isInitializedMovies
@@ -20,13 +24,16 @@ export default function ObjectContainer() {
 
   //заповнення головного масиву фільмів
   useEffect(() => {
-    if (!isInitialized && data && Array.isArray(data)) {
-      data.forEach((movie: any) => {
-        dispatch(addToLibrary({ id: movie.imdbID }));
-      });
+    if (!isInitialized && data1 && data2 && data3 && data4 && data5) {
+      dispatch(addToLibrary(data1));
+      dispatch(addToLibrary(data2));
+      dispatch(addToLibrary(data3));
+      dispatch(addToLibrary(data4));
+      dispatch(addToLibrary(data5));
       dispatch(setInitialized());
     }
-  }, [data, dispatch, isInitialized]);
+  }, [data1, data2, data3, data4, data5, dispatch, isInitialized]);
+
   //---------------------------------------------
 
   //головний елмент коду
@@ -44,7 +51,7 @@ export default function ObjectContainer() {
           </div>
         )}
         {library.map((movieId) => (
-          <MovieObjectLibrary key={movieId.id} id={movieId.id} />
+          <MovieObjectLibrary key={movieId.imdbID} imdbID={movieId.imdbID} />
         ))}
       </div>
     </>

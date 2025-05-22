@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IMovieId, MovieLibraryState } from "./movie.type";
+import { IMovie, MovieLibraryState } from "./movie.type";
 
 import { TypeRootState } from "../store";
 
@@ -12,14 +12,18 @@ export const movieLibrarySlice = createSlice({
   name: "movieLibrary",
   initialState,
   reducers: {
-    addToLibrary: (state, action: PayloadAction<IMovieId>) => {
-      const exists = state.library.some((m) => m.id === action.payload.id);
+    addToLibrary: (state, action: PayloadAction<IMovie>) => {
+      const exists = state.library.some(
+        (m) => m.imdbID === action.payload.imdbID
+      );
       if (!exists) {
         state.library.push(action.payload);
       }
     },
-    removeFromLibrary: (state, action: PayloadAction<IMovieId>) => {
-      state.library = state.library.filter((m) => m.id !== action.payload.id);
+    removeFromLibrary: (state, action: PayloadAction<IMovie>) => {
+      state.library = state.library.filter(
+        (m) => m.imdbID !== action.payload.imdbID
+      );
     },
 
     clearLibrary: (state) => {
@@ -45,5 +49,5 @@ export const checkIsInLibrary = (
   state: TypeRootState,
   movieId: string
 ): boolean => {
-  return state.movieLibrary.library.some((m) => m.id === movieId);
+  return state.movieLibrary.library.some((m) => m.imdbID === movieId);
 };

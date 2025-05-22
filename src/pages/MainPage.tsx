@@ -5,7 +5,7 @@ import {
   useGetMovieByIdQuery,
   useGetMoviesHomePageQuery,
 } from "../store/movie/movie.api";
-import { IMovie, MovieObjectRecommendation } from "../store/movie/movie.type";
+import { IMovie } from "../store/movie/movie.type";
 import { useEffect, useState } from "react";
 export default function MainPage() {
   const [active, setActive] = useState<number>(4);
@@ -27,20 +27,21 @@ export default function MainPage() {
   });
 
   //формування масиву з 20 фільмів айді і фото
-  const movies: MovieObjectRecommendation[] = [
-    ...(data1 || []),
-    ...(data2 || []),
-  ].map((movie: any) => ({
-    //виправити
-    id: movie.imdbID,
-    image: movie.Poster,
-  }));
+  const movies: IMovie[] = [...(data1 || []), ...(data2 || [])].map(
+    (movie: any) => ({
+      //виправити
+      imdbID: movie.imdbID,
+      Poster: movie.Poster,
+    })
+  );
 
   //встановлення активного айді
   useEffect(() => {
     if (movies.length > 0) {
       const activeMovie = movies[active % movies.length];
-      setActiveMovieId(activeMovie.id);
+      if (activeMovie.imdbID) {
+        setActiveMovieId(activeMovie.imdbID);
+      }
     }
   }, [active, movies]);
 

@@ -7,10 +7,10 @@ import "swiper/css/navigation";
 
 // import required modules
 import { Navigation } from "swiper/modules";
-import { MovieObjectRecommendation } from "../../store/movie/movie.type";
+import { IMovie } from "../../store/movie/movie.type";
 
 type SliderProps = {
-  movies: MovieObjectRecommendation[];
+  movies: IMovie[];
   activeSlideIndex: number;
   onSlideChange: (newIndex: number) => void;
 };
@@ -94,7 +94,7 @@ export default function Slider({
                 <img
                   className="h-48 w-full rounded-xl object-cover transition-all duration-500 
                 ease-in-out group-hover:brightness-110"
-                  src={movie.image}
+                  src={movie.Poster}
                   alt={`item-${index + 1}`}
                 />
               </div>
