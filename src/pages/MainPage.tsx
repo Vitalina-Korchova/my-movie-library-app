@@ -45,11 +45,7 @@ export default function MainPage() {
     }
   }, [active, movies]);
 
-  const {
-    data: dataId,
-    isLoading: loadingId,
-    error: errorId,
-  } = useGetMovieByIdQuery(activeMovieId);
+  const { data: dataId } = useGetMovieByIdQuery(activeMovieId);
 
   const movieObject: IMovie = {
     imdbID: dataId?.imdbID,
@@ -66,19 +62,23 @@ export default function MainPage() {
 
   return (
     <>
-      {loadingId && <div className="text-white text-xl">Loading...</div>}
-      {errorId && <div className="text-red-700 text-xl">Error...</div>}
       <div className="relative w-full flex flex-col min-h-screen z-0 bg-black">
         <div
           className="absolute inset-y-0 right-0 w-1/2  bg-cover bg-center"
           style={{
-            backgroundImage: `url(${movieObject.Poster})`,
+            backgroundImage: movieObject.Poster
+              ? `url(${movieObject.Poster})`
+              : "none",
+            backgroundColor: !movieObject.Poster ? "#333" : "transparent",
           }}
         ></div>
         <div
           className="absolute inset-y-0 left-0 w-1/2  bg-cover bg-center scale-x-[-1]"
           style={{
-            backgroundImage: `url(${movieObject.Poster})`,
+            backgroundImage: movieObject.Poster
+              ? `url(${movieObject.Poster})`
+              : "none",
+            backgroundColor: !movieObject.Poster ? "#333" : "transparent",
           }}
         ></div>
 
@@ -96,12 +96,6 @@ export default function MainPage() {
           plot={movieObject.Plot}
         />
 
-        {loading && <div className="text-white text-xl">Loading...</div>}
-        {error && (
-          <div className="text-red-500 text-xl">
-            Error while loading movies!
-          </div>
-        )}
         {!loading && !error && movies.length > 0 && (
           <Slider
             movies={movies}

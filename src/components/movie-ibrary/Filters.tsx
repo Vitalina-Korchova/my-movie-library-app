@@ -1,21 +1,32 @@
-import { useState } from "react";
 import DropdownMenu from "./components/DropdownMenu";
 
-export default function Filters() {
-  const [title, setTitle] = useState<string>("");
-  const [year, setYear] = useState<string>("");
-  const [genre, setGenre] = useState<string | null>(null);
-  const [actor, setActor] = useState<string>("");
-  const [country, setCountry] = useState<string>("");
+type FilterData = {
+  title: string | undefined;
+  setTitle: (val: string) => void;
+  year: string | undefined;
+  setYear: (val: string) => void;
+  genre: string | null;
+  setGenre: (val: string | null) => void;
+  actor: string | undefined;
+  setActor: (val: string) => void;
+  country: string | undefined;
+  setCountry: (val: string) => void;
+  clearFilters: () => void;
+};
 
-  const clearFilters = () => {
-    setTitle("");
-    setYear("");
-    setGenre(null);
-    setActor("");
-    setCountry("");
-  };
-
+export default function Filters({
+  title,
+  setTitle,
+  year,
+  setYear,
+  genre,
+  setGenre,
+  actor,
+  setActor,
+  country,
+  setCountry,
+  clearFilters,
+}: FilterData) {
   return (
     <>
       <div className="flex items-start p-7 space-x-5 justify-center">

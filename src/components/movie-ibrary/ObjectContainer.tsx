@@ -9,7 +9,21 @@ import { useEffect } from "react";
 import MovieObjectLibrary from "./components/MovieObjectFilter";
 import { TypeRootState } from "../../store/store";
 
-export default function ObjectContainer() {
+type ObjectContainerProps = {
+  title: string;
+  year: string;
+  genre: string | null;
+  actor: string;
+  country: string;
+};
+
+export default function ObjectContainer({
+  title,
+  year,
+  genre,
+  actor,
+  country,
+}: ObjectContainerProps) {
   //---------------------------------------------
   //для демонстрації роблю 5 фільмів які будуть вдразу в моїй бібліотеці
   const { data: data1, isLoading, error } = useGetMovieByIdQuery("tt0325980");
@@ -39,6 +53,47 @@ export default function ObjectContainer() {
   //головний елмент коду
   const library = useSelector(selectLibrary);
   console.log(library);
+  const moviesInLibrary = library.map((movie) => ({
+    imdbID: movie.imdbID,
+    Poster: movie.Poster,
+    Title: movie.Title,
+    Year: movie.Year,
+    Genre: movie.Genre,
+    Actor: movie.Actors,
+    Country: movie.Country,
+  }));
+
+  const filteredMovies = moviesInLibrary.filter((movie) => {
+    const matchesTitle = title
+      ? movie.Title?.toLowerCase().includes(title.toLowerCase())
+      : true;
+    const matchesYear = year
+      ? movie.Year?.toString().includes(year.toLowerCase())
+      : true;
+    const matchesGenre = genre
+      ? movie.Genre?.split(",")
+          .map((g) => g.trim().toLowerCase())
+          .some((g) => g.includes(genre.toLowerCase()))
+      : true;
+
+    const matchesActor = actor
+      ? movie.Actor?.split(",")
+          .map((a) => a.trim().toLowerCase())
+          .some((a) => a.includes(actor.toLowerCase()))
+      : true;
+
+    const matchesCountry = country
+      ? movie.Country?.toLowerCase().includes(country.toLowerCase())
+      : true;
+
+    return (
+      matchesTitle &&
+      matchesYear &&
+      matchesGenre &&
+      matchesActor &&
+      matchesCountry
+    );
+  });
 
   return (
     <>
@@ -50,8 +105,13 @@ export default function ObjectContainer() {
             Error while loading movies!
           </div>
         )}
-        {library.map((movieId) => (
-          <MovieObjectLibrary key={movieId.imdbID} imdbID={movieId.imdbID} />
+        {filteredMovies.map((m) => (
+          <MovieObjectLibrary
+            key={m.imdbID}
+            imdbID={m.imdbID}
+            Poster={m.Poster}
+            Title={m.Title}
+          />
         ))}
       </div>
     </>

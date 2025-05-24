@@ -23,12 +23,8 @@ export default function AddMoviePage() {
 
   const dispatch = useDispatch();
 
-  const { data, isLoading, error } = useGetMoviesQuery(searchValue);
-  const {
-    data: dataId,
-    isLoading: loadingId,
-    error: errorId,
-  } = useGetMovieByIdQuery(selectedMovieId);
+  const { data } = useGetMoviesQuery(searchValue);
+  const { data: dataId } = useGetMovieByIdQuery(selectedMovieId);
 
   const movieObjects =
     data?.map((movie) => ({
@@ -49,13 +45,16 @@ export default function AddMoviePage() {
     Runtime: dataId?.Runtime,
     Country: dataId?.Country,
     Plot: dataId?.Plot,
+    Type: dataId?.Type,
+    Actors: dataId?.Actors,
+    Language: dataId?.Language,
   };
 
   const addMovie = () => {
-    dispatch(addToLibrary({  imdbID: selectedMovieId }));
+    dispatch(addToLibrary(selectedMovieObject));
   };
   const removeMovie = () => {
-    dispatch(removeFromLibrary({  imdbID: selectedMovieId }));
+    dispatch(removeFromLibrary({ imdbID: selectedMovieId }));
   };
 
   const clearAll = () => {
@@ -100,10 +99,6 @@ export default function AddMoviePage() {
             </button>
 
             <div className="h-[610px] overflow-y-auto mt-8 custom-scrollbar-add-movie">
-              {isLoading && (
-                <div className="text-white text-xl">Loading...</div>
-              )}
-              {error && <div className="text-red-700 text-xl">Eror...</div>}
               {searchValue === "" || data?.length === 0 ? (
                 <>
                   <MdManageSearch className="text-[160px] text-yellow-400 text-center m-auto" />
@@ -131,9 +126,6 @@ export default function AddMoviePage() {
             </div>
           </div>
           <div className="bg-neutral-800 p-5 w-full rounded-lg relative h-[680px]">
-            {loadingId && <div className="text-white text-xl">Loading...</div>}
-            {errorId && <div className="text-red-700 text-xl">Eror...</div>}
-
             <button
               onClick={clearSelectedMovie}
               className="bg-white px-2 py-1 rounded-full flex items-center justify-center 
