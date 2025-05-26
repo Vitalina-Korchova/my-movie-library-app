@@ -7,6 +7,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
+import DetailedInfoMovie from "./pages/DetailedInfoMovie";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
             <Route path="/" element={<MainPage />} />
             <Route path="/movie-library" element={<LibraryPage />} />
             <Route path="/add-movie" element={<AddMoviePage />} />
+            <Route path="/movie" element={<DetailedInfoMovie />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Router>

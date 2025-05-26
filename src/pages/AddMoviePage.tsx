@@ -20,6 +20,7 @@ import { TypeRootState } from "../store/store";
 export default function AddMoviePage() {
   const [searchValue, setSearchValue] = useState("");
   const [selectedMovieId, setSelectedMovieId] = useState<string>("");
+  const [selectedCount, setSelectedCount] = useState<number>(0);
 
   const dispatch = useDispatch();
 
@@ -48,6 +49,7 @@ export default function AddMoviePage() {
     Type: dataId?.Type,
     Actors: dataId?.Actors,
     Language: dataId?.Language,
+    userRating: selectedCount,
   };
 
   const addMovie = () => {
@@ -69,6 +71,10 @@ export default function AddMoviePage() {
   const checkingIdInLibrary = useSelector((state: TypeRootState) =>
     checkIsInLibrary(state, selectedMovieId)
   );
+
+  const handleClickStars = (index: number) => {
+    setSelectedCount(index + 1);
+  };
 
   return (
     <>
@@ -155,6 +161,8 @@ export default function AddMoviePage() {
                   onAddMovie={addMovie}
                   onRemoveMovie={removeMovie}
                   checkingIdInLibrary={checkingIdInLibrary}
+                  selectedCount={selectedCount}
+                  onClickStars={handleClickStars}
                 />
               </>
             )}

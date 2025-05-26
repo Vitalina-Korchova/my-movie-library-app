@@ -1,13 +1,11 @@
-import { useState } from "react";
 import { FaRegStar, FaStar } from "react-icons/fa";
 
-export default function Stars() {
-  const [selectedCount, setSelectedCount] = useState<number>(0);
+type StarsProps = {
+  selectedCount: number;
+  onClickStars: (index: number) => void;
+};
 
-  const handleClick = (index: number) => {
-    setSelectedCount(index + 1);
-  };
-
+export default function Stars({ selectedCount, onClickStars }: StarsProps) {
   return (
     <div
       className="flex flex-row gap-2 text-4xl text-yellow-400 py-5 justify-center items-center
@@ -16,7 +14,7 @@ export default function Stars() {
       {[...Array(10)].map((_, index) => (
         <div
           key={index}
-          onClick={() => handleClick(index)}
+          onClick={() => onClickStars(index)}
           className="cursor-pointer"
         >
           {index < selectedCount ? <FaStar /> : <FaRegStar />}

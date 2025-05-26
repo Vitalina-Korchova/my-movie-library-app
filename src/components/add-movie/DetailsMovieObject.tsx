@@ -12,6 +12,8 @@ type MovieInfoSelected = {
   onAddMovie: () => void;
   onRemoveMovie: () => void;
   checkingIdInLibrary: boolean;
+  selectedCount: number | 0;
+  onClickStars: (index: number) => void;
 };
 
 export default function DetailsMovieObject({
@@ -26,6 +28,8 @@ export default function DetailsMovieObject({
   onAddMovie,
   onRemoveMovie,
   checkingIdInLibrary,
+  selectedCount,
+  onClickStars,
 }: MovieInfoSelected) {
   return (
     <>
@@ -40,11 +44,11 @@ export default function DetailsMovieObject({
             </div>
             <span>{genres}</span>
             <span>{country}</span>
-            <span>Rating: {rating} / 10</span>
+            <span>IMDB Rating: {rating} / 10</span>
           </div>
         </div>
         <span className="font-bold text-xl mt-5 text-center">My rating</span>
-        <Stars />
+        <Stars selectedCount={selectedCount} onClickStars={onClickStars} />
         <div>
           <span>{plot}</span>
         </div>

@@ -1,7 +1,7 @@
 export default function NotFoundPage() {
   return (
     <>
-      <h1>MainPage</h1>
+      <h1>Error page</h1>
     </>
   );
 }
