@@ -44,10 +44,10 @@ export default function DetailsMovieObject({
             </div>
             <span>{genres}</span>
             <span>{country}</span>
-            <span>IMDB Rating: {rating} / 10</span>
+            <span>IMDb Rating: {rating} / 10</span>
           </div>
         </div>
-        <span className="font-bold text-xl mt-5 text-center">My rating</span>
+        <span className="font-bold text-xl my-5 text-center">My rating</span>
         <Stars selectedCount={selectedCount} onClickStars={onClickStars} />
         <div>
           <span>{plot}</span>
