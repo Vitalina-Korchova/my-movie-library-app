@@ -51,3 +51,11 @@ export const checkIsInLibrary = (
 ): boolean => {
   return state.movieLibrary.library.some((m) => m.imdbID === movieId);
 };
+
+//витяг за айді всю інформацію про конкретний об'єкт
+export const getMovieFromLibraryById = (
+  state: TypeRootState,
+  movieId: string
+): IMovie | undefined => {
+  return state.movieLibrary.library.find((m) => m.imdbID === movieId);
+};

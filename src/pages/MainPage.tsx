@@ -88,12 +88,13 @@ export default function MainPage() {
         <NavPage />
 
         <GeneralInfoMovie
-          title={movieObject.Title}
-          genres={movieObject.Genre}
-          year={movieObject.Year}
-          rating={movieObject.imdbRating}
-          runtime={movieObject.Runtime}
-          plot={movieObject.Plot}
+          imdbID={movieObject.imdbID}
+          Title={movieObject.Title}
+          Genre={movieObject.Genre}
+          Year={movieObject.Year}
+          imdbRating={movieObject.imdbRating}
+          Runtime={movieObject.Runtime}
+          Plot={movieObject.Plot}
         />
 
         {!loading && !error && movies.length > 0 && (

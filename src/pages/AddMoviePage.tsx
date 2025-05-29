@@ -3,7 +3,7 @@ import FoundMovieObject from "../components/add-movie/FoundMovieObject";
 import DetailsMovieObject from "../components/add-movie/DetailsMovieObject";
 import { MdManageSearch } from "react-icons/md";
 import { AiOutlineSelect } from "react-icons/ai";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   useGetMovieByIdQuery,
   useGetMoviesQuery,
@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addToLibrary,
   checkIsInLibrary,
+  getMovieFromLibraryById,
   removeFromLibrary,
 } from "../store/movie/movie.slice";
 import { TypeRootState } from "../store/store";
@@ -72,9 +73,19 @@ export default function AddMoviePage() {
     checkIsInLibrary(state, selectedMovieId)
   );
 
+  //витяг об'єкта по айді для відображення зірок
+  const movieFoundInLibrary = useSelector((state: TypeRootState) =>
+    getMovieFromLibraryById(state, selectedMovieId)
+  );
+
   const handleClickStars = (index: number) => {
     setSelectedCount(index + 1);
   };
+
+  //скидаю кількість зірок щоразу як перемикаюсь між знайденими фільмами
+  useEffect(() => {
+    setSelectedCount(0);
+  }, [selectedMovieId]);
 
   return (
     <>
@@ -163,6 +174,7 @@ export default function AddMoviePage() {
                   checkingIdInLibrary={checkingIdInLibrary}
                   selectedCount={selectedCount}
                   onClickStars={handleClickStars}
+                  movieFoundInLibrary={movieFoundInLibrary}
                 />
               </>
             )}

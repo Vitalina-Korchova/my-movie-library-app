@@ -1,4 +1,5 @@
-import Stars from "./Stars";
+import { FaRegStar, FaStar } from "react-icons/fa";
+import { IMovie } from "../../store/movie/movie.type";
 
 type MovieInfoSelected = {
   poster: string | undefined;
@@ -14,6 +15,7 @@ type MovieInfoSelected = {
   checkingIdInLibrary: boolean;
   selectedCount: number | 0;
   onClickStars: (index: number) => void;
+  movieFoundInLibrary: IMovie | undefined;
 };
 
 export default function DetailsMovieObject({
@@ -30,7 +32,13 @@ export default function DetailsMovieObject({
   checkingIdInLibrary,
   selectedCount,
   onClickStars,
+  movieFoundInLibrary,
 }: MovieInfoSelected) {
+  const userRating = movieFoundInLibrary?.userRating;
+
+  const ratingStars: number = !checkingIdInLibrary
+    ? selectedCount
+    : userRating ?? 0;
   return (
     <>
       <div className="flex flex-col">
@@ -47,11 +55,23 @@ export default function DetailsMovieObject({
             <span>IMDb Rating: {rating} / 10</span>
           </div>
         </div>
-        <span className="font-bold text-xl my-5 text-center">My rating</span>
-        <Stars selectedCount={selectedCount} onClickStars={onClickStars} />
-        <div>
-          <span>{plot}</span>
+        <span className="font-bold text-xl my-4 text-center">My rating</span>
+        <div
+          className="flex flex-row gap-2 text-4xl text-yellow-400 py-5 justify-center items-center
+         bg-neutral-700 rounded-lg"
+        >
+          {[...Array(10)].map((_, index) => (
+            <div
+              key={index}
+              onClick={() => onClickStars(index)}
+              className="cursor-pointer"
+            >
+              {index < ratingStars ? <FaStar /> : <FaRegStar />}
+            </div>
+          ))}
         </div>
+        <span className="mt-6">{plot}</span>
+
         {!checkingIdInLibrary ? (
           <>
             <button
