@@ -6,6 +6,7 @@ import { TypeRootState } from "../store";
 const initialState: MovieLibraryState = {
   library: [],
   isInitializedMovies: false, //тільки для демонстрації щоб відразу показувалось 10 фільмів
+  isShowedPopUpMain: false, //змінна для відстеження попапу на головному екрані (Демонстраціний проєкт без локал стореджу)
 };
 
 export const movieLibrarySlice = createSlice({
@@ -33,11 +34,19 @@ export const movieLibrarySlice = createSlice({
       //для демонстрації
       state.isInitializedMovies = true;
     },
+    setShowedPopUpMainPage: (state) => {
+      state.isShowedPopUpMain = true;
+    },
   },
 });
 
-export const { addToLibrary, removeFromLibrary, clearLibrary, setInitialized } =
-  movieLibrarySlice.actions;
+export const {
+  addToLibrary,
+  removeFromLibrary,
+  clearLibrary,
+  setInitialized,
+  setShowedPopUpMainPage,
+} = movieLibrarySlice.actions;
 export default movieLibrarySlice.reducer;
 
 //отримати всі елементи

@@ -8,6 +8,7 @@ import {
 import { useEffect } from "react";
 import MovieObjectLibrary from "./components/MovieObjectFilter";
 import { TypeRootState } from "../../store/store";
+import { Link } from "react-router-dom";
 
 type ObjectContainerProps = {
   title: string;
@@ -52,7 +53,7 @@ export default function ObjectContainer({
 
   //головний елмент коду
   const library = useSelector(selectLibrary);
-  console.log(library);
+
   const moviesInLibrary = library.map((movie) => ({
     imdbID: movie.imdbID,
     Poster: movie.Poster,
@@ -106,12 +107,14 @@ export default function ObjectContainer({
           </div>
         )}
         {filteredMovies.map((m) => (
-          <MovieObjectLibrary
-            key={m.imdbID}
-            imdbID={m.imdbID}
-            Poster={m.Poster}
-            Title={m.Title}
-          />
+          <Link to={`/movie/${m.imdbID}`}>
+            <MovieObjectLibrary
+              key={m.imdbID}
+              imdbID={m.imdbID}
+              Poster={m.Poster}
+              Title={m.Title}
+            />
+          </Link>
         ))}
       </div>
     </>

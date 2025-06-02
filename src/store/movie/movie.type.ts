@@ -24,4 +24,5 @@ export interface OMDBResponse {
 export interface MovieLibraryState {
   library: IMovie[];
   isInitializedMovies: boolean;
+  isShowedPopUpMain: boolean;
 }

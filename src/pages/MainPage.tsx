@@ -7,9 +7,14 @@ import {
 } from "../store/movie/movie.api";
 import { IMovie } from "../store/movie/movie.type";
 import { useEffect, useState } from "react";
+import PopUp from "../components/PopUp";
+import { useDispatch, useSelector } from "react-redux";
+import { TypeRootState } from "../store/store";
+import { setShowedPopUpMainPage } from "../store/movie/movie.slice";
 export default function MainPage() {
   const [active, setActive] = useState<number>(4);
   const [activeMovieId, setActiveMovieId] = useState<string>("");
+  const [showPopup, setShowPopup] = useState(false);
 
   //запити на витяг 20 фільмів апі
   const {
@@ -60,8 +65,34 @@ export default function MainPage() {
     Plot: dataId?.Plot,
   };
 
+  const dispatch = useDispatch();
+  const isShowedPopUp = useSelector(
+    (state: TypeRootState) => state.movieLibrary.isShowedPopUpMain
+  );
+
+  useEffect(() => {
+    if (!isShowedPopUp) {
+      const timeout = setTimeout(() => {
+        setShowPopup(true);
+        dispatch(setShowedPopUpMainPage());
+      }, 1000);
+      return () => clearTimeout(timeout);
+    }
+  }, [dispatch, isShowedPopUp]);
+
+  const titlePopUp = `Demonstration project`;
+  const descriptionPopUp = ` This project was made without local storage. When you refresh the
+            page the entire movie library, filters, and ratings will return to
+            their original state!`;
   return (
     <>
+      {showPopup && (
+        <PopUp
+          onClose={() => setShowPopup(false)}
+          title={titlePopUp}
+          description={descriptionPopUp}
+        />
+      )}
       <div className="relative w-full flex flex-col min-h-screen z-0 bg-black">
         <div
           className="absolute inset-y-0 right-0 w-1/2  bg-cover bg-center"

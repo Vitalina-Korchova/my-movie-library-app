@@ -9,11 +9,24 @@ import { BiBook } from "react-icons/bi";
 import { FaImdb } from "react-icons/fa";
 import { useGetMovieByIdQuery } from "../store/movie/movie.api";
 import { IMovie } from "../store/movie/movie.type";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { FaRegQuestionCircle } from "react-icons/fa";
+import {
+  addToLibrary,
+  checkIsInLibrary,
+  getMovieFromLibraryById,
+  removeFromLibrary,
+} from "../store/movie/movie.slice";
+import { TypeRootState } from "../store/store";
 
 export default function DetailedInfoMovie() {
-  const selectedCount = 0;
+  const [selectedCount, setSelectedCount] = useState<number>(0);
   const { id } = useParams<{ id: string }>(); // витягуємо параметр з URL
   const { data } = useGetMovieByIdQuery(id as string);
+  const [showPopup, setShowPopup] = useState(false);
+
+  const dispatch = useDispatch();
 
   const movieObject: IMovie = {
     imdbID: data?.imdbID,
@@ -28,9 +41,33 @@ export default function DetailedInfoMovie() {
     Country: data?.Country,
     Language: data?.Language,
     Type: data?.Type,
+    userRating: selectedCount,
   };
 
-  console.log(data);
+  const addMovie = () => {
+    dispatch(addToLibrary(movieObject));
+  };
+  const removeMovie = () => {
+    dispatch(removeFromLibrary({ imdbID: id }));
+  };
+
+  const checkingIdInLibrary = useSelector((state: TypeRootState) =>
+    id ? checkIsInLibrary(state, id) : false
+  );
+
+  const handleClickStars = (index: number) => {
+    setSelectedCount(index + 1);
+  };
+
+  const movieFoundInLibrary = useSelector((state: TypeRootState) =>
+    id ? getMovieFromLibraryById(state, id) : undefined
+  );
+
+  const userRating = movieFoundInLibrary?.userRating;
+
+  const ratingStars: number = !checkingIdInLibrary
+    ? selectedCount
+    : userRating ?? 0;
 
   return (
     <>
@@ -81,7 +118,12 @@ export default function DetailedInfoMovie() {
               <FaImdb className="text-5xl text-yellow-400" />
               <span className="text-base">{movieObject?.imdbRating} / 10</span>
             </div>
-            <span className="font-semibold text-xl mt-4">My rating </span>
+            <div className="flex flex-row gap-2 items-center mt-4">
+              <span className="font-semibold text-xl ">My rating </span>
+              <button className="cursor-pointer">
+                <FaRegQuestionCircle className="text-yellow-400 text-2xl hover:text-yellow-500" />
+              </button>
+            </div>
             <div
               className="flex flex-row gap-2 text-4xl text-yellow-400 py-5 justify-center items-center
              bg-neutral-700 rounded-lg"
@@ -89,19 +131,34 @@ export default function DetailedInfoMovie() {
               {[...Array(10)].map((_, index) => (
                 <div
                   key={index}
-                  // onClick={() => onClickStars(index)}
+                  onClick={() => handleClickStars(index)}
                   className="cursor-pointer"
                 >
-                  {index < selectedCount ? <FaStar /> : <FaRegStar />}
+                  {index < ratingStars ? <FaStar /> : <FaRegStar />}
                 </div>
               ))}
             </div>
-            <button
-              className=" text-black bg-yellow-400 py-2.5 px-3 flex justify-center items-center
-            font-semibold rounded-lg text-base cursor-pointer w-48 m-auto mt-8 hover:bg-amber-400"
-            >
-              Add to my library
-            </button>
+            {!checkingIdInLibrary ? (
+              <>
+                <button
+                  onClick={addMovie}
+                  className=" text-black bg-yellow-400 py-2.5 px-3 flex justify-center items-center
+                font-semibold rounded-lg text-base cursor-pointer w-48 m-auto mt-8 hover:bg-amber-400"
+                >
+                  Add to my library
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={removeMovie}
+                  className=" text-black bg-red-400 py-2.5 px-3 flex justify-center items-center
+                font-semibold rounded-lg text-base cursor-pointer w-48 m-auto mt-8 hover:bg-red-500"
+                >
+                  Remove from library
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>
