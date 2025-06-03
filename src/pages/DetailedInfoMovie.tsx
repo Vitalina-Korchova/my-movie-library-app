@@ -19,6 +19,7 @@ import {
   removeFromLibrary,
 } from "../store/movie/movie.slice";
 import { TypeRootState } from "../store/store";
+import PopUp from "../components/PopUp";
 
 export default function DetailedInfoMovie() {
   const [selectedCount, setSelectedCount] = useState<number>(0);
@@ -30,7 +31,11 @@ export default function DetailedInfoMovie() {
 
   const movieObject: IMovie = {
     imdbID: data?.imdbID,
-    Poster: data?.Poster ? `${data.Poster.split("_")[0]}_SX600.jpg` : undefined,
+    Poster:
+      data?.Poster && data.Poster !== "N/A"
+        ? `${data.Poster.split("_")[0]}_SX600.jpg`
+        : "/no_image.png",
+
     Title: data?.Title,
     Genre: data?.Genre,
     Year: data?.Year,
@@ -69,8 +74,18 @@ export default function DetailedInfoMovie() {
     ? selectedCount
     : userRating ?? 0;
 
+  const titlePopUp = `Help Tip`;
+  const descriptionPopUp = `To change a movie's rating, you need to remove the
+   current movie from your library, then rate the movie and add it back to your library.`;
   return (
     <>
+      {showPopup && (
+        <PopUp
+          title={titlePopUp}
+          description={descriptionPopUp}
+          onClose={() => setShowPopup(false)}
+        />
+      )}
       <div className="flex flex-col bg-stone-900 w-full min-h-screen bg-cover">
         <NavPage />
         <div className="bg-neutral-800 text-amber-50 mx-5 mb-5 rounded-lg p-5 flex justify-between items-center">
@@ -120,7 +135,10 @@ export default function DetailedInfoMovie() {
             </div>
             <div className="flex flex-row gap-2 items-center mt-4">
               <span className="font-semibold text-xl ">My rating </span>
-              <button className="cursor-pointer">
+              <button
+                onClick={() => setShowPopup(true)}
+                className="cursor-pointer"
+              >
                 <FaRegQuestionCircle className="text-yellow-400 text-2xl hover:text-yellow-500" />
               </button>
             </div>

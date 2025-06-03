@@ -22,7 +22,7 @@ export default function PopUp({
       <div className="fixed inset-0 z-50 bg-black/70 flex justify-center items-center">
         <div
           ref={popupRef}
-          className="slide-down bg-neutral-950 opacity-85 text-white p-6 rounded-xl 
+          className="slide-down bg-neutral-950  text-white p-6 rounded-xl 
         shadow-lg w-[90%] max-w-md border-[1px] border-yellow-600"
         >
           <h2 className="text-2xl font-bold mb-4 text-center">{title}</h2>

@@ -31,7 +31,10 @@ export default function AddMoviePage() {
   const movieObjects =
     data?.map((movie) => ({
       imdbID: movie.imdbID,
-      Poster: movie.Poster,
+      Poster:
+        movie.Poster === "N/A" || !movie.Poster
+          ? "/no_image.png"
+          : movie.Poster,
       Title: movie.Title,
       Year: movie.Year,
       Type: movie.Type,
@@ -39,7 +42,10 @@ export default function AddMoviePage() {
 
   const selectedMovieObject: IMovie = {
     imdbID: dataId?.imdbID,
-    Poster: dataId?.Poster,
+    Poster:
+      dataId?.Poster === "N/A" || !dataId?.Poster
+        ? "/no_image.png"
+        : dataId?.Poster,
     Title: dataId?.Title,
     Genre: dataId?.Genre,
     Year: dataId?.Year,
