@@ -33,7 +33,7 @@ export default function MainPage() {
 
   //формування масиву з 20 фільмів айді і фото
   const movies: IMovie[] = [...(data1 || []), ...(data2 || [])].map(
-    (movie: any) => ({
+    (movie: IMovie) => ({
       //виправити
       imdbID: movie.imdbID,
       Poster: movie.Poster,
@@ -83,7 +83,7 @@ export default function MainPage() {
   const titlePopUp = `Demonstration project`;
   const descriptionPopUp = ` This project was made without local storage. When you refresh the
             page the entire movie library, filters, and ratings will return to
-            their original state!`;
+            their original states!`;
   return (
     <>
       {showPopup && (

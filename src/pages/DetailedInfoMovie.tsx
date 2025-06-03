@@ -23,7 +23,7 @@ import PopUp from "../components/PopUp";
 
 export default function DetailedInfoMovie() {
   const [selectedCount, setSelectedCount] = useState<number>(0);
-  const { id } = useParams<{ id: string }>(); // витягуємо параметр з URL
+  const { id } = useParams<{ id: string }>(); // витягую параметр з URL
   const { data } = useGetMovieByIdQuery(id as string);
   const [showPopup, setShowPopup] = useState(false);
 
