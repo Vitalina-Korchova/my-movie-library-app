@@ -1,8 +1,14 @@
 @import "tailwindcss";
 
 /* @theme {
-  --breakpoint-smCus: 2500px;
+  --breakpoint-laptopMini: 1024px;
 } */
+
+/* 
+breakpoint adaptive custom*/
+/* max-[465px] */
+/* max-md
+max-sm */
 
 /* custom scrollbar */
 .custom-scrollbar {

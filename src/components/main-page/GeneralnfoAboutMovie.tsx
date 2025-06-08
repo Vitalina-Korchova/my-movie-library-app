@@ -14,22 +14,37 @@ export default function GeneralInfoMovie({
   return (
     <>
       <div className="z-10 flex flex-col gap-3.5 ms-10 mb-10">
-        <span className="text-white font-semibold text-5xl max-w-[870px]">
+        <span className="text-white font-semibold text-5xl max-w-[870px]  max-[465px]:pe-5 max-[465px]:text-2xl">
           {Title}
         </span>
-        <div className="flex flex-row gap-1 text-white text-sm">
-          <span>{Genre} |</span>
-          <span>{Year}</span>
-          <span>| General rating: {imdbRating} | </span>
-          <span>{Runtime}</span>
+        <div className="flex flex-row gap-1 text-white text-sm max-md:text-xs max-[465px]:grid max-[465px]:grid-cols-2 max-[465px]:gap-3">
+          <span className="text-yellow-400 border-[1px] border-yellow-400 rounded-lg px-2 w-fit max-[465px]:">
+            {Genre}
+          </span>
+          <span className="text-yellow-400 border-[1px] border-yellow-400 rounded-lg px-2 w-fit ">
+            {Year}
+          </span>
+          <span className="text-yellow-400 border-[1px] border-yellow-400 rounded-lg px-2 w-fit ">
+            General rating: {imdbRating}
+          </span>
+          <span className="text-yellow-400 border-[1px] border-yellow-400 rounded-lg px-2 w-fit ">
+            {Runtime}
+          </span>
         </div>
-        <span className="text-sm text-white max-w-[450px]">{Plot}</span>
+        <span
+          className="text-sm font-medium text-white max-w-[450px] pe-5 max-[465px]:text-xs
+         "
+        >
+          {Plot}
+        </span>
         <Link to={`/movie/${imdbID}`}>
           <button
             className="text-black bg-yellow-400 py-2.5 px-3 flex justify-start self-start
-          font-semibold rounded-lg text-sm items-center cursor-pointer  hover:bg-amber-400"
+          font-semibold rounded-lg text-sm items-center cursor-pointer  hover:bg-amber-400 
+          
+           "
           >
-            <MdPlayArrow className="text-2xl me-1" />
+            <MdPlayArrow className="text-2xl me-1 max-[465px]:text-xl" />
             Show me
           </button>
         </Link>

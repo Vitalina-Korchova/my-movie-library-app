@@ -11,9 +11,21 @@ import PopUp from "../components/PopUp";
 import { useDispatch, useSelector } from "react-redux";
 import { TypeRootState } from "../store/store";
 import { setShowedPopUpMainPage } from "../store/movie/movie.slice";
+import { useWindowSize } from "react-use";
+
 export default function MainPage() {
-  const [active, setActive] = useState<number>(4);
-  const [activeMovieId, setActiveMovieId] = useState<string>("");
+  const { width: widthWindow } = useWindowSize();
+  const activeSlide = widthWindow <= 384 ? 1 : widthWindow <= 767 ? 2 : 4; //просто цифра актвиного слайда
+
+  //визначення активного слайда відповідно до адаптивки
+  useEffect(() => {
+    if (widthWindow <= 384) setActiveState(1);
+    else if (widthWindow <= 767) setActiveState(2);
+    else setActiveState(4);
+  }, [widthWindow]);
+
+  const [activeState, setActiveState] = useState<number>(activeSlide); //стан активного слайді
+  const [activeMovieId, setActiveMovieId] = useState<string>(""); //активне айді
   const [showPopup, setShowPopup] = useState(false);
 
   //запити на витяг 20 фільмів апі
@@ -34,7 +46,6 @@ export default function MainPage() {
   //формування масиву з 20 фільмів айді і фото
   const movies: IMovie[] = [...(data1 || []), ...(data2 || [])].map(
     (movie: IMovie) => ({
-      //виправити
       imdbID: movie.imdbID,
       Poster: movie.Poster,
     })
@@ -43,12 +54,12 @@ export default function MainPage() {
   //встановлення активного айді
   useEffect(() => {
     if (movies.length > 0) {
-      const activeMovie = movies[active % movies.length];
+      const activeMovie = movies[activeState % movies.length];
       if (activeMovie.imdbID) {
         setActiveMovieId(activeMovie.imdbID);
       }
     }
-  }, [active, movies]);
+  }, [activeState, movies]);
 
   const { data: dataId } = useGetMovieByIdQuery(activeMovieId);
 
@@ -65,6 +76,7 @@ export default function MainPage() {
     Plot: dataId?.Plot,
   };
 
+  //показати попап про демонстраційний проєкт
   const dispatch = useDispatch();
   const isShowedPopUp = useSelector(
     (state: TypeRootState) => state.movieLibrary.isShowedPopUpMain
@@ -95,7 +107,7 @@ export default function MainPage() {
       )}
       <div className="relative w-full flex flex-col min-h-screen z-0 bg-black">
         <div
-          className="absolute inset-y-0 right-0 w-1/2  bg-cover bg-center"
+          className=" absolute inset-y-0 right-0 w-1/2  bg-cover bg-center max-sm:w-full"
           style={{
             backgroundImage: movieObject.Poster
               ? `url(${movieObject.Poster})`
@@ -104,7 +116,7 @@ export default function MainPage() {
           }}
         ></div>
         <div
-          className="absolute inset-y-0 left-0 w-1/2  bg-cover bg-center scale-x-[-1]"
+          className="max-sm:hidden absolute inset-y-0 left-0 w-1/2  bg-cover bg-center scale-x-[-1] "
           style={{
             backgroundImage: movieObject.Poster
               ? `url(${movieObject.Poster})`
@@ -131,8 +143,9 @@ export default function MainPage() {
         {!loading && !error && movies.length > 0 && (
           <Slider
             movies={movies}
-            activeSlideIndex={active}
-            onSlideChange={(newIndex) => setActive(newIndex)}
+            activeSlideIndex={activeState}
+            activeNumber={activeSlide}
+            onSlideChange={(newIndex) => setActiveState(newIndex)}
           />
         )}
       </div>
