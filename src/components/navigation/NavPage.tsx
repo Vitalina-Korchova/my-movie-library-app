@@ -20,7 +20,8 @@ export default function NavPage() {
           </Link>
           <IoMenu
             onClick={() => setIsSmallScreen(true)}
-            className="text-5xl text-white md:hidden cursor-pointer hover:text-yellow-400 max-[465px]:text-3xl"
+            className="text-5xl text-white md:hidden cursor-pointer
+             hover:text-yellow-400 max-[465px]:text-3xl"
           />
           {isSmallScreen ? (
             <>
@@ -30,13 +31,13 @@ export default function NavPage() {
                     <div className="flex justify-end">
                       <RxCross1
                         onClick={() => setIsSmallScreen(false)}
-                        className="text-white text-3xl hover:text-yellow-400 cursor-pointer"
+                        className="text-white text-3xl hover:text-yellow-400 cursor-pointer max-[465px]:text-3xl"
                       />
                     </div>
                     <div>
                       <Link to="/">
                         <span
-                          className={`inline-block  hover:text-yellow-400 text-xl ${
+                          className={`inline-block  hover:text-yellow-400 text-xl max-[465px]:text-lg ${
                             isActive("/") ? "text-yellow-400" : "text-white"
                           }`}
                         >
@@ -47,7 +48,7 @@ export default function NavPage() {
                     <div>
                       <Link to="/movie-library">
                         <span
-                          className={`inline-block   hover:text-yellow-400 text-xl ${
+                          className={`inline-block   hover:text-yellow-400 text-xl max-[465px]:text-lg ${
                             isActive("/movie-library")
                               ? "text-yellow-400"
                               : "text-white"
@@ -60,7 +61,7 @@ export default function NavPage() {
                     <div>
                       <Link to="/add-movie">
                         <span
-                          className={`inline-block   hover:text-yellow-400 text-xl ${
+                          className={`inline-block   hover:text-yellow-400 text-xl max-[465px]:text-lg ${
                             isActive("/add-movie")
                               ? "text-yellow-400"
                               : "text-white"

@@ -14,25 +14,33 @@ export default function GeneralInfoMovie({
   return (
     <>
       <div className="z-10 flex flex-col gap-3.5 ms-10 mb-10">
-        <span className="text-white font-semibold text-5xl max-w-[870px]  max-[465px]:pe-5 max-[465px]:text-2xl">
+        <span
+          className="text-white font-semibold text-5xl max-w-[870px]
+          max-[465px]:pe-5 max-[465px]:text-2xl"
+        >
           {Title}
         </span>
-        <div className="flex flex-row gap-1 text-white text-sm max-md:text-xs max-[465px]:grid max-[465px]:grid-cols-2 max-[465px]:gap-3">
-          <span className="text-yellow-400 border-[1px] border-yellow-400 rounded-lg px-2 w-fit max-[465px]:">
+        <div className="flex flex-row gap-1 text-white text-sm max-md:text-xs max-[465px]:flex-col max-[465px]:gap-2">
+          <span
+            className="text-yellow-400 border-[1px] border-yellow-400 rounded-lg px-2 
+          w-fit "
+          >
             {Genre}
           </span>
-          <span className="text-yellow-400 border-[1px] border-yellow-400 rounded-lg px-2 w-fit ">
-            {Year}
-          </span>
-          <span className="text-yellow-400 border-[1px] border-yellow-400 rounded-lg px-2 w-fit ">
-            General rating: {imdbRating}
-          </span>
-          <span className="text-yellow-400 border-[1px] border-yellow-400 rounded-lg px-2 w-fit ">
-            {Runtime}
-          </span>
+          <div className="flex flex-row gap-1">
+            <span className="text-yellow-400 border-[1px] border-yellow-400 rounded-lg px-2 w-fit ">
+              {Year}
+            </span>
+            <span className="text-yellow-400 border-[1px] border-yellow-400 rounded-lg px-2 w-fit ">
+              General rating: {imdbRating}
+            </span>
+            <span className="text-yellow-400 border-[1px] border-yellow-400 rounded-lg px-2 w-fit ">
+              {Runtime}
+            </span>
+          </div>
         </div>
         <span
-          className="text-sm font-medium text-white max-w-[450px] pe-5 max-[465px]:text-xs
+          className="text-sm font-medium text-white max-w-[450px] pe-5 max-[465px]:text-sm
          "
         >
           {Plot}
