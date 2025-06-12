@@ -77,6 +77,7 @@ export default function DetailedInfoMovie() {
   const titlePopUp = `Help Tip`;
   const descriptionPopUp = `To change a movie's rating, you need to remove the
    current movie from your library, then rate the movie and add it back to your library.`;
+
   return (
     <>
       {showPopup && (
@@ -88,95 +89,110 @@ export default function DetailedInfoMovie() {
       )}
       <div className="flex flex-col bg-stone-900 w-full min-h-screen bg-cover">
         <NavPage />
-        <div className="bg-neutral-800 text-amber-50 mx-5 mb-5 rounded-lg p-5 flex justify-between items-center">
-          <div className=" w-2/3 flex justify-center items-center self-start flex-col">
-            <img
-              className="rounded-lg size-2/3"
-              src={movieObject?.Poster}
-              alt=""
-            />
-
-            <span className="text-sm my-4 text-center w-96">
-              {movieObject?.Plot}
-            </span>
-          </div>
-          <div className="w-full flex self-start flex-col gap-3">
-            <span className="font-bold text-3xl">{movieObject?.Title}</span>
-            <span className="text-lg">{movieObject?.Genre}</span>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="flex flex-row gap-3 items-center p-2 bg-neutral-700 rounded-lg w-68">
-                <FaCalendarDay className="text-2xl text-yellow-400" />
-                <span> {movieObject?.Year} release year</span>
-              </div>
-              <div className="flex flex-row gap-3 items-center p-2 bg-neutral-700 rounded-lg w-88">
-                <IoMdPerson className="text-3xl text-yellow-400" />
-                <span className="text-sm">{movieObject?.Actors}</span>
-              </div>
-              <div className="flex flex-row gap-3 items-center p-2 bg-neutral-700 rounded-lg w-68">
-                <IoIosTimer className="text-2xl text-yellow-400" />
-                <span>{movieObject?.Runtime}</span>
-              </div>
-              <div className="flex flex-row gap-3 items-center p-2 bg-neutral-700 rounded-lg w-88">
-                <IoLanguage className="text-2xl text-yellow-400" />
-                <span>{movieObject?.Language}</span>
-              </div>
-              <div className="flex flex-row gap-3 items-center p-2 bg-neutral-700 rounded-lg w-68">
-                <BiWorld className="text-2xl text-yellow-400" />
-                <span>{movieObject?.Country}</span>
-              </div>
-              <div className="flex flex-row gap-3 items-center p-2 bg-neutral-700 rounded-lg w-88">
-                <BiBook className="text-2xl text-yellow-400" />
-                <span>{movieObject?.Type}</span>
-              </div>
+        <div
+          className="bg-neutral-800 text-amber-50 mx-5 mb-5 rounded-lg p-7 
+        "
+        >
+          <div className="flex items-center justify-center m-auto space-x-5">
+            <div className="flex justify-center items-center  flex-col p-5 ">
+              <img
+                className="rounded-lg size-2/3"
+                src={movieObject?.Poster}
+                alt=""
+              />
             </div>
-            <div className="flex flex-row gap-3 mt-3 items-center">
-              <FaImdb className="text-5xl text-yellow-400" />
-              <span className="text-base">{movieObject?.imdbRating} / 10</span>
-            </div>
-            <div className="flex flex-row gap-2 items-center mt-4">
-              <span className="font-semibold text-xl ">My rating </span>
-              <button
-                onClick={() => setShowPopup(true)}
-                className="cursor-pointer"
-              >
-                <FaRegQuestionCircle className="text-yellow-400 text-2xl hover:text-yellow-500" />
-              </button>
-            </div>
-            <div
-              className="flex flex-row gap-2 text-4xl text-yellow-400 py-5 justify-center items-center
-             bg-neutral-700 rounded-lg"
-            >
-              {[...Array(10)].map((_, index) => (
-                <div
-                  key={index}
-                  onClick={() => handleClickStars(index)}
+            <div className="w-full flex self-start flex-col gap-3 max-w-[650px]">
+              <span className="font-bold text-3xl max-lg:text-2xl">
+                {movieObject?.Title}
+              </span>
+              <span className="text-lg text-yellow-400 font-medium max-lg:text-base">
+                {movieObject?.Genre}
+              </span>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="flex flex-row gap-3 items-center p-2 bg-neutral-700 rounded-lg max-w-68 ">
+                  <FaCalendarDay className="text-2xl text-yellow-400 max-lg:text-xl " />
+                  <span className="max-lg:text-sm">
+                    {movieObject?.Year} release year
+                  </span>
+                </div>
+                <div className="flex flex-row gap-3 items-center p-2 bg-neutral-700 rounded-lg max-w-88">
+                  <IoMdPerson className="text-3xl text-yellow-400" />
+                  <span className="text-sm">{movieObject?.Actors}</span>
+                </div>
+                <div className="flex flex-row gap-3 items-center p-2 bg-neutral-700 rounded-lg max-w-68">
+                  <IoIosTimer className="text-2xl text-yellow-400" />
+                  <span>{movieObject?.Runtime}</span>
+                </div>
+                <div className="flex flex-row gap-3 items-center p-2 bg-neutral-700 rounded-lg max-w-88">
+                  <IoLanguage className="text-2xl text-yellow-400" />
+                  <span className="text-sm">{movieObject?.Language}</span>
+                </div>
+                <div className="flex flex-row gap-3 items-center p-2 bg-neutral-700 rounded-lg max-w-68">
+                  <BiBook className="text-2xl text-yellow-400" />
+                  <span>{movieObject?.Type}</span>
+                </div>
+                <div className="flex flex-row gap-3 items-center p-2 bg-neutral-700 rounded-lg max-w-88">
+                  <BiWorld className="text-2xl text-yellow-400" />
+                  <span className="text-sm">{movieObject?.Country}</span>
+                </div>
+              </div>
+              <div className="flex flex-row gap-3 mt-3 items-center">
+                <FaImdb className="text-5xl text-yellow-400" />
+                <span className="text-base">
+                  {movieObject?.imdbRating} / 10
+                </span>
+              </div>
+              <div className="flex flex-row gap-2 items-center mt-4">
+                <span className="font-semibold text-xl ">My rating </span>
+                <button
+                  onClick={() => setShowPopup(true)}
                   className="cursor-pointer"
                 >
-                  {index < ratingStars ? <FaStar /> : <FaRegStar />}
-                </div>
-              ))}
-            </div>
-            {!checkingIdInLibrary ? (
-              <>
-                <button
-                  onClick={addMovie}
-                  className=" text-black bg-yellow-400 py-2.5 px-3 flex justify-center items-center
+                  <FaRegQuestionCircle className="text-yellow-400 text-2xl hover:text-yellow-500" />
+                </button>
+              </div>
+
+              {/* Stars */}
+              <div
+                className="flex flex-row gap-2 text-4xl text-yellow-400 py-5 justify-center items-center
+             bg-neutral-700 rounded-lg"
+              >
+                {[...Array(10)].map((_, index) => (
+                  <div
+                    key={index}
+                    onClick={() => handleClickStars(index)}
+                    className="cursor-pointer"
+                  >
+                    {index < ratingStars ? <FaStar /> : <FaRegStar />}
+                  </div>
+                ))}
+              </div>
+              <span className="text-sm my-4 text-center ">
+                {movieObject?.Plot}
+              </span>
+
+              {!checkingIdInLibrary ? (
+                <>
+                  <button
+                    onClick={addMovie}
+                    className=" text-black bg-yellow-400 py-2.5 px-3 flex justify-center items-center
                 font-semibold rounded-lg text-base cursor-pointer w-48 m-auto mt-8 hover:bg-amber-400"
-                >
-                  Add to my library
-                </button>
-              </>
-            ) : (
-              <>
-                <button
-                  onClick={removeMovie}
-                  className=" text-black bg-red-400 py-2.5 px-3 flex justify-center items-center
+                  >
+                    Add to my library
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    onClick={removeMovie}
+                    className=" text-black bg-red-400 py-2.5 px-3 flex justify-center items-center
                 font-semibold rounded-lg text-base cursor-pointer w-48 m-auto mt-8 hover:bg-red-500"
-                >
-                  Remove from library
-                </button>
-              </>
-            )}
+                  >
+                    Remove from library
+                  </button>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>

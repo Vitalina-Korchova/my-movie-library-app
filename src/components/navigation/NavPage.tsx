@@ -25,7 +25,7 @@ export default function NavPage() {
           />
           {isSmallScreen ? (
             <>
-              <div className="fixed right-0 top-0 z-50 bg-black h-screen">
+              <div className="fixed right-0 top-0 z-50 bg-black h-screen ">
                 <div className="w-80  p-8 ">
                   <div className="flex flex-col space-y-6">
                     <div className="flex justify-end">

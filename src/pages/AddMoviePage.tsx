@@ -17,11 +17,13 @@ import {
   removeFromLibrary,
 } from "../store/movie/movie.slice";
 import { TypeRootState } from "../store/store";
+import { useSearchParams } from "react-router-dom";
 
 export default function AddMoviePage() {
   const [searchValue, setSearchValue] = useState("");
   const [selectedMovieId, setSelectedMovieId] = useState<string>("");
   const [selectedCount, setSelectedCount] = useState<number>(0);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const dispatch = useDispatch();
 
@@ -92,6 +94,20 @@ export default function AddMoviePage() {
   useEffect(() => {
     setSelectedCount(0);
   }, [selectedMovieId]);
+
+  //URL
+  useEffect(() => {
+    const initTitle = searchParams.get("searchValue") || "";
+
+    setSearchValue(initTitle);
+  }, [searchParams]);
+
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const params: any = {};
+    if (searchValue) params.searchValue = searchValue;
+    setSearchParams(params);
+  }, [searchValue, setSearchParams]);
 
   return (
     <>
