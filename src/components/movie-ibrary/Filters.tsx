@@ -1,3 +1,5 @@
+import { FaFilter } from "react-icons/fa";
+import Input from "../Input";
 import DropdownMenu from "./components/DropdownMenu";
 
 type FilterData = {
@@ -29,57 +31,78 @@ export default function Filters({
 }: FilterData) {
   return (
     <>
-      <div className="flex items-start p-7 space-x-5 justify-center">
-        <input
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="flex-1 min-w-72 border-[1px] border-gray-400 text-white rounded-xl 
-          p-1.5 h-12 outline-none focus:border-yellow-400
-             hover:border-yellow-400 "
-          type="text"
-          id="searchByTitle"
-          placeholder="Search by title..."
-          autoComplete="off"
-        />
-        <input
-          value={year}
-          onChange={(e) => setYear(e.target.value)}
-          className=" flex-1 max-w-52 border-[1px] border-gray-400 text-white 
-          rounded-xl p-1.5 h-12 w-36 outline-none focus:border-yellow-400 hover:border-yellow-400"
-          type="text"
-          id="searchByYear"
-          placeholder="Search by year"
-          autoComplete="off"
-        />
-        <DropdownMenu value={genre} changeValue={setGenre} />
-        <input
-          value={actor}
-          onChange={(e) => setActor(e.target.value)}
-          className=" flex-1 max-w-[500px] border-[1px] border-gray-400 text-white
-           rounded-xl p-1.5 h-12 outline-none focus:border-yellow-400 hover:border-yellow-400"
-          type="text"
-          id="searchByActors"
-          placeholder="Search by actors"
-          autoComplete="off"
-        />
-        <input
-          value={country}
-          onChange={(e) => setCountry(e.target.value)}
-          className=" flex-1 max-w-[450px]  border-[1px] border-gray-400 text-white 
-          rounded-xl p-1.5 h-12 outline-none focus:border-yellow-400 hover:border-yellow-400"
-          type="text"
-          id="searchByCountry"
-          placeholder="Search by country"
-          autoComplete="off"
-        />
-        <button
-          onClick={clearFilters}
-          className="text-black bg-yellow-400 py-2.5 h-12 px-3 flex justify-start self-start
-                        font-medium rounded-xl items-center cursor-pointer hover:bg-amber-400"
-        >
-          Clear
-          <i className="fa-solid fa-xmark ps-3 text-lg"></i>
-        </button>
+      <div
+        className="flex items-start p-7 space-x-5 justify-center rounded-xl mx-12 bg-neutral-900/60 
+      border-[1px] border-neutral-800 shadow-lg shadow-stone-900"
+      >
+        {/* Desktop version */}
+        <div className="hidden lg:block">
+          <div className="flex flex-col gap-4 xl:flex-row ">
+            <div>
+              <Input
+                value={title}
+                setValue={setTitle}
+                id="searchByTitle"
+                placeholder="Search by title..."
+                className="w-full xl:min-w-72"
+              />
+            </div>
+            <div className="flex flex-row gap-4">
+              <Input
+                value={year}
+                setValue={setYear}
+                id="searchByYear"
+                placeholder="Search by year"
+              />
+
+              <DropdownMenu value={genre} changeValue={setGenre} />
+
+              <Input
+                value={actor}
+                setValue={setActor}
+                id="searchByActors"
+                placeholder="Search by actors"
+              />
+              <Input
+                value={country}
+                setValue={setCountry}
+                id="searchByCountry"
+                placeholder="Search by country"
+              />
+
+              <button
+                onClick={clearFilters}
+                className="text-yellow-400 bg-transparent py-2.5 h-10 px-3 flex justify-start self-start text-sm border-[1px] border-yellow-400
+                        font-medium rounded-lg items-center cursor-pointer hover:bg-yellow-400 hover:text-black"
+              >
+                Clear
+                <i className="fa-solid fa-xmark ps-3 text-lg"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile version */}
+        <div className="block lg:hidden">
+          <div className="flex flex-col gap-4 ">
+            <Input
+              value={title}
+              setValue={setTitle}
+              id="searchByTitle"
+              placeholder="Search by title..."
+              className="w-full "
+            />
+            <button
+              className="bg-yellow-400  rounded-md p-1 w-full cursor-pointer hover:bg-transparent
+             hover:text-yellow-400 border-[1px] border-yellow-400"
+            >
+              <div className="flex flex-row gap-2 items-center justify-center">
+                <span className="font-semibold">Filters</span>
+                <FaFilter />
+              </div>
+            </button>
+          </div>
+        </div>
       </div>
     </>
   );

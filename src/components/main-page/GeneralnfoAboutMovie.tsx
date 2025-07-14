@@ -1,6 +1,6 @@
-import { MdPlayArrow } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { IMovie } from "../../store/movie/movie.type";
+import { FaLongArrowAltRight } from "react-icons/fa";
 
 export default function GeneralInfoMovie({
   imdbID,
@@ -47,13 +47,14 @@ export default function GeneralInfoMovie({
         </span>
         <Link to={`/movie/${imdbID}`}>
           <button
-            className="text-black bg-yellow-400 py-2.5 px-3 flex justify-start self-start
-          font-semibold rounded-lg text-sm items-center cursor-pointer  hover:bg-amber-400 
-          
+            className="text-yellow-400 bg-transparent border-[1px] border-yellow-400 p-2
+           rounded-md  cursor-pointer hover:text-black hover:bg-yellow-400 
            "
           >
-            <MdPlayArrow className="text-2xl me-1 max-[465px]:text-xl" />
-            Show me
+            <div className="flex flex-row gap-3 items-center">
+              <span className="font-semibold text-sm">Show me</span>
+              <FaLongArrowAltRight className="  text-lg " />
+            </div>
           </button>
         </Link>
       </div>

@@ -1,6 +1,6 @@
 import { IMovie } from "../../../store/movie/movie.type";
 
-export default function MovieObjectLibrary({ imdbID, Title, Poster }: IMovie) {
+export default function MovieObjectLibrary({ Title, Poster }: IMovie) {
   return (
     <>
       <div className="flex flex-col items-center ">
@@ -8,9 +8,9 @@ export default function MovieObjectLibrary({ imdbID, Title, Poster }: IMovie) {
           <img
             src={Poster}
             alt=""
-            className="w-36 h-48 rounded-lg mb-3 transition-all duration-300 hover:scale-110"
+            className="w-full h-full rounded-lg mb-3 transition-all duration-300 hover:scale-110"
           />
-          <span className="text-white font-bold w-36 break-words text-center">
+          <span className="text-white font-semibold w-40 break-words text-start text-xs">
             {Title}
           </span>
         </div>

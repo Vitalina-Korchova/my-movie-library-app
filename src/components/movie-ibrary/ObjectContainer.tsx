@@ -98,7 +98,7 @@ export default function ObjectContainer({
 
   return (
     <>
-      <div className="m-7 flex flex-row gap-16 flex-wrap items-start justify-center">
+      <div className="my-9 flex flex-row  flex-wrap items-start justify-between mx-12">
         {isLoading && <div className="text-white text-xl">Loading...</div>}
 
         {error && (

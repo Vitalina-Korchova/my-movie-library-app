@@ -19,7 +19,7 @@ export default function PopUp({
   };
   return (
     <>
-      <div className="fixed inset-0 z-50 bg-black/70 flex justify-center items-center">
+      <div className="fixed inset-0 z-50 bg-black/70  flex justify-center items-center">
         <div
           ref={popupRef}
           className="slide-down bg-neutral-950  text-white p-6 rounded-xl 

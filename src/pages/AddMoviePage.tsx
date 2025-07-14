@@ -111,7 +111,7 @@ export default function AddMoviePage() {
 
   return (
     <>
-      <div className="flex flex-col bg-stone-900 w-full bg-cover min-h-screen">
+      <div className="flex flex-col bg-black w-full bg-cover min-h-screen">
         <NavPage />
         <input
           className="min-w-72 border-[1px] border-gray-400 text-white rounded-xl 

@@ -93,15 +93,15 @@ export default function DetailedInfoMovie() {
           className="bg-neutral-800 text-amber-50 mx-5 mb-5 rounded-lg p-7 
         "
         >
-          <div className="flex items-center justify-center m-auto space-x-5">
-            <div className="flex justify-center items-center  flex-col p-5 ">
+          <div className="flex items-center justify-center m-auto space-x-5 flex-col lg:flex-row">
+            <div className="flex justify-center items-center m-auto p-7 ">
               <img
-                className="rounded-lg size-2/3"
+                className="rounded-lg    "
                 src={movieObject?.Poster}
                 alt=""
               />
             </div>
-            <div className="w-full flex self-start flex-col gap-3 max-w-[650px]">
+            <div className="w-full flex self-start flex-col gap-3 ">
               <span className="font-bold text-3xl max-lg:text-2xl">
                 {movieObject?.Title}
               </span>
@@ -115,9 +115,11 @@ export default function DetailedInfoMovie() {
                     {movieObject?.Year} release year
                   </span>
                 </div>
-                <div className="flex flex-row gap-3 items-center p-2 bg-neutral-700 rounded-lg max-w-88">
-                  <IoMdPerson className="text-3xl text-yellow-400" />
-                  <span className="text-sm">{movieObject?.Actors}</span>
+                <div className="flex flex-row gap-3 items-center p-2 bg-neutral-700 rounded-lg max-w-88 ">
+                  <IoMdPerson className="text-3xl  text-yellow-400" />
+                  <span className="md:text-sm text-[9px]">
+                    {movieObject?.Actors}
+                  </span>
                 </div>
                 <div className="flex flex-row gap-3 items-center p-2 bg-neutral-700 rounded-lg max-w-68">
                   <IoIosTimer className="text-2xl text-yellow-400" />
@@ -125,7 +127,9 @@ export default function DetailedInfoMovie() {
                 </div>
                 <div className="flex flex-row gap-3 items-center p-2 bg-neutral-700 rounded-lg max-w-88">
                   <IoLanguage className="text-2xl text-yellow-400" />
-                  <span className="text-sm">{movieObject?.Language}</span>
+                  <span className="md:text-sm text-[9px]">
+                    {movieObject?.Language}
+                  </span>
                 </div>
                 <div className="flex flex-row gap-3 items-center p-2 bg-neutral-700 rounded-lg max-w-68">
                   <BiBook className="text-2xl text-yellow-400" />
@@ -133,7 +137,9 @@ export default function DetailedInfoMovie() {
                 </div>
                 <div className="flex flex-row gap-3 items-center p-2 bg-neutral-700 rounded-lg max-w-88">
                   <BiWorld className="text-2xl text-yellow-400" />
-                  <span className="text-sm">{movieObject?.Country}</span>
+                  <span className="md:text-sm text-[9px]">
+                    {movieObject?.Country}
+                  </span>
                 </div>
               </div>
               <div className="flex flex-row gap-3 mt-3 items-center">
@@ -155,7 +161,7 @@ export default function DetailedInfoMovie() {
               {/* Stars */}
               <div
                 className="flex flex-row gap-2 text-4xl text-yellow-400 py-5 justify-center items-center
-             bg-neutral-700 rounded-lg"
+                bg-neutral-700 rounded-lg"
               >
                 {[...Array(10)].map((_, index) => (
                   <div
@@ -163,7 +169,11 @@ export default function DetailedInfoMovie() {
                     onClick={() => handleClickStars(index)}
                     className="cursor-pointer"
                   >
-                    {index < ratingStars ? <FaStar /> : <FaRegStar />}
+                    {index < ratingStars ? (
+                      <FaStar className="md:size-10 size-5" />
+                    ) : (
+                      <FaRegStar className="md:size-10 size-5" />
+                    )}
                   </div>
                 ))}
               </div>
