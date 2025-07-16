@@ -6,10 +6,28 @@ import { RxCross1 } from "react-icons/rx";
 
 export default function NavPage() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isClose, setIsClose] = useState(false);
 
   const location = useLocation();
 
   const isActive = (path: string): boolean => location.pathname === path;
+
+  const handleCloseMenu = () => {
+    setIsClose(true);
+    setIsSmallScreen(false);
+    setTimeout(() => {
+      setIsClose(false);
+      setIsOpen(false);
+    }, 500);
+  };
+
+  const handleOpenMenu = () => {
+    setIsOpen(true);
+    setTimeout(() => {
+      setIsSmallScreen(true);
+    }, 10);
+  };
 
   return (
     <>
@@ -19,18 +37,28 @@ export default function NavPage() {
             <Logo />
           </Link>
           <IoMenu
-            onClick={() => setIsSmallScreen(true)}
+            onClick={handleOpenMenu}
             className="text-5xl text-white md:hidden cursor-pointer
              hover:text-yellow-400 max-[465px]:text-3xl"
           />
-          {isSmallScreen ? (
+          {isOpen ? (
             <>
-              <div className="fixed right-0 top-0 z-50 bg-black h-screen ">
+              <div
+                className={`fixed right-0 top-0 z-50 bg-black h-screen rounded-lg border-[1px] border-neutral-600 
+                transition-transform duration-500 ease-in-out
+                ${
+                  isSmallScreen
+                    ? isClose
+                      ? "translate-x-full"
+                      : "translate-x-0"
+                    : "translate-x-full"
+                }`}
+              >
                 <div className="w-80  p-8 ">
                   <div className="flex flex-col space-y-6">
                     <div className="flex justify-end">
                       <RxCross1
-                        onClick={() => setIsSmallScreen(false)}
+                        onClick={handleCloseMenu}
                         className="text-white text-3xl hover:text-yellow-400 cursor-pointer max-[465px]:text-3xl"
                       />
                     </div>

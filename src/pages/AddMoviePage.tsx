@@ -114,7 +114,7 @@ export default function AddMoviePage() {
       <div className="flex flex-col bg-black w-full bg-cover min-h-screen">
         <NavPage />
         <input
-          className="min-w-72 border-[1px] border-gray-400 text-white rounded-xl 
+          className="min-w-72 border-[1px] border-gray-400 text-white rounded-lg 
           p-1.5 mx-10 my-3 h-12 outline-none focus:border-yellow-400
              hover:border-yellow-400 "
           type="text"
@@ -125,10 +125,13 @@ export default function AddMoviePage() {
           onChange={(e) => setSearchValue(e.target.value)}
         />
         <div
-          className="flex flex-row gap-5 text-white mx-10 my-5 items-start justify-center 
+          className="flex flex-col lg:flex-row gap-5 text-white mx-10 my-5 items-start justify-center 
         "
         >
-          <div className="bg-neutral-800 p-5  w-2/3 rounded-lg relative">
+          <div
+            className="p-5 w-full lg:w-2/3 rounded-lg relative bg-neutral-800/60 
+          border-[1px] border-neutral-800 shadow-lg shadow-stone-900"
+          >
             <button
               onClick={clearAll}
               className="bg-white px-2 py-1 rounded-full flex items-center justify-center 
@@ -137,7 +140,7 @@ export default function AddMoviePage() {
               <i className="fa-solid fa-xmark text-lg text-black "></i>
             </button>
 
-            <div className="h-[610px] overflow-y-auto mt-8 custom-scrollbar-add-movie">
+            <div className="h-68 lg:h-[610px] overflow-y-auto mt-8 custom-scrollbar-add-movie">
               {searchValue === "" || data?.length === 0 ? (
                 <>
                   <MdManageSearch className="text-[160px] text-yellow-400 text-center m-auto" />
@@ -164,7 +167,10 @@ export default function AddMoviePage() {
               )}
             </div>
           </div>
-          <div className="bg-neutral-800 p-5 w-full rounded-lg relative h-[680px]">
+          <div
+            className=" p-5 w-full rounded-lg relative h-[640px] md:h-[680px]  bg-neutral-800/60 
+          border-[1px] border-neutral-800 shadow-lg shadow-stone-900"
+          >
             <button
               onClick={clearSelectedMovie}
               className="bg-white px-2 py-1 rounded-full flex items-center justify-center 

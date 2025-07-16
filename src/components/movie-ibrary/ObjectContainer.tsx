@@ -72,15 +72,15 @@ export default function ObjectContainer({
       ? movie.Year?.toString().includes(year.toLowerCase())
       : true;
     const matchesGenre = genre
-      ? movie.Genre?.split(",")
-          .map((g) => g.trim().toLowerCase())
-          .some((g) => g.includes(genre.toLowerCase()))
+      ? movie.Genre?.map((g) => g.trim().toLowerCase()).some((g) =>
+          g.includes(genre.toLowerCase())
+        )
       : true;
 
     const matchesActor = actor
-      ? movie.Actor?.split(",")
-          .map((a) => a.trim().toLowerCase())
-          .some((a) => a.includes(actor.toLowerCase()))
+      ? movie.Actor?.map((a) => a.trim().toLowerCase()).some((a) =>
+          a.includes(actor.toLowerCase())
+        )
       : true;
 
     const matchesCountry = country
@@ -98,7 +98,7 @@ export default function ObjectContainer({
 
   return (
     <>
-      <div className="my-9 flex flex-row  flex-wrap items-start justify-between mx-12">
+      <div className="my-9  mx-9 flex flex-row flex-wrap gap-6 justify-center">
         {isLoading && <div className="text-white text-xl">Loading...</div>}
 
         {error && (
@@ -107,9 +107,8 @@ export default function ObjectContainer({
           </div>
         )}
         {filteredMovies.map((m) => (
-          <Link to={`/movie/${m.imdbID}`}>
+          <Link key={m.imdbID} to={`/movie/${m.imdbID}`} className="block">
             <MovieObjectLibrary
-              key={m.imdbID}
               imdbID={m.imdbID}
               Poster={m.Poster}
               Title={m.Title}

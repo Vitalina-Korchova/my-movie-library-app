@@ -43,22 +43,30 @@ export default function DetailsMovieObject({
     <>
       <div className="flex flex-col">
         <div className="flex flex-row rounded-lg ">
-          <img src={poster} alt="" className="rounded-lg w-48 " />
+          <img
+            src={poster}
+            alt=""
+            className="rounded-lg w-32 h-60 md:w-48 md:h-auto"
+          />
           <div className="px-5 flex flex-col gap-5">
-            <span className="font-bold text-wrap text-2xl">{title}</span>
+            <span className="font-bold text-wrap text-lg md:text-2xl">
+              {title}
+            </span>
             <div>
-              <span>{year} year </span>
-              <span>• {runtime}</span>
+              <span className="text-xs md:text-base">{year} year </span>
+              <span className="text-xs md:text-base">• {runtime}</span>
             </div>
-            <span>{genres}</span>
-            <span>{country}</span>
-            <span>IMDb Rating: {rating} / 10</span>
+            <span className="text-xs md:text-base">{genres}</span>
+            <span className="text-xs md:text-base">{country}</span>
+            <span className="text-xs md:text-base">
+              IMDb Rating: {rating} / 10
+            </span>
           </div>
         </div>
         <span className="font-bold text-xl my-4 text-center">My rating</span>
         <div
           className="flex flex-row gap-2 text-4xl text-yellow-400 py-5 justify-center items-center
-         bg-neutral-700 rounded-lg"
+         bg-neutral-700/35 rounded-lg border-[1px] border-neutral-700 shadow-lg shadow-neutral-800"
         >
           {[...Array(10)].map((_, index) => (
             <div
@@ -66,11 +74,15 @@ export default function DetailsMovieObject({
               onClick={() => onClickStars(index)}
               className="cursor-pointer"
             >
-              {index < ratingStars ? <FaStar /> : <FaRegStar />}
+              {index < ratingStars ? (
+                <FaStar className=" size-9 max-[624px]:size-6 max-[480px]:size-4" />
+              ) : (
+                <FaRegStar className=" size-9 max-[624px]:size-6 max-[480px]:size-4" />
+              )}
             </div>
           ))}
         </div>
-        <span className="mt-6">{plot}</span>
+        <span className="mt-6 text-xs md:text-base">{plot}</span>
 
         {!checkingIdInLibrary ? (
           <>

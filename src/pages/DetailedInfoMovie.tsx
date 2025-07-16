@@ -87,20 +87,20 @@ export default function DetailedInfoMovie() {
           onClose={() => setShowPopup(false)}
         />
       )}
-      <div className="flex flex-col bg-stone-900 w-full min-h-screen bg-cover">
+      <div className="flex flex-col bg-black w-full min-h-screen bg-cover">
         <NavPage />
         <div
-          className="bg-neutral-800 text-amber-50 mx-5 mb-5 rounded-lg p-7 
+          className=" text-amber-50 mx-5 mb-5 rounded-lg p-7  bg-neutral-800/60 
+      border-[1px] border-neutral-800 shadow-lg shadow-stone-900
         "
         >
-          <div className="flex items-center justify-center m-auto space-x-5 flex-col lg:flex-row">
-            <div className="flex justify-center items-center m-auto p-7 ">
-              <img
-                className="rounded-lg    "
-                src={movieObject?.Poster}
-                alt=""
-              />
-            </div>
+          <div className="flex items-center lg:items-start justify-center m-auto gap-8 flex-col lg:flex-row">
+            <img
+              className="rounded-lg w-auto lg:w-96 shadow-xl shadow-black"
+              src={movieObject?.Poster}
+              alt=""
+            />
+
             <div className="w-full flex self-start flex-col gap-3 ">
               <span className="font-bold text-3xl max-lg:text-2xl">
                 {movieObject?.Title}
@@ -109,33 +109,33 @@ export default function DetailedInfoMovie() {
                 {movieObject?.Genre}
               </span>
               <div className="grid grid-cols-2 gap-3">
-                <div className="flex flex-row gap-3 items-center p-2 bg-neutral-700 rounded-lg max-w-68 ">
+                <div className="flex flex-row gap-3 items-center p-2 bg-neutral-700/35 rounded-lg border-[1px] border-neutral-700 shadow-md shadow-neutral-800 max-w-68 ">
                   <FaCalendarDay className="text-2xl text-yellow-400 max-lg:text-xl " />
                   <span className="max-lg:text-sm">
                     {movieObject?.Year} release year
                   </span>
                 </div>
-                <div className="flex flex-row gap-3 items-center p-2 bg-neutral-700 rounded-lg max-w-88 ">
+                <div className="flex flex-row gap-3 items-center p-2 bg-neutral-700/35 rounded-lg border-[1px] border-neutral-700 shadow-md shadow-neutral-800 max-w-88 ">
                   <IoMdPerson className="text-3xl  text-yellow-400" />
                   <span className="md:text-sm text-[9px]">
                     {movieObject?.Actors}
                   </span>
                 </div>
-                <div className="flex flex-row gap-3 items-center p-2 bg-neutral-700 rounded-lg max-w-68">
+                <div className="flex flex-row gap-3 items-center p-2 bg-neutral-700/35 rounded-lg border-[1px] border-neutral-700 shadow-md shadow-neutral-800 max-w-68">
                   <IoIosTimer className="text-2xl text-yellow-400" />
                   <span>{movieObject?.Runtime}</span>
                 </div>
-                <div className="flex flex-row gap-3 items-center p-2 bg-neutral-700 rounded-lg max-w-88">
+                <div className="flex flex-row gap-3 items-center p-2 bg-neutral-700/35 rounded-lg border-[1px] border-neutral-700 shadow-md shadow-neutral-800 max-w-88">
                   <IoLanguage className="text-2xl text-yellow-400" />
                   <span className="md:text-sm text-[9px]">
                     {movieObject?.Language}
                   </span>
                 </div>
-                <div className="flex flex-row gap-3 items-center p-2 bg-neutral-700 rounded-lg max-w-68">
+                <div className="flex flex-row gap-3 items-center p-2 bg-neutral-700/35 rounded-lg border-[1px] border-neutral-700 shadow-md shadow-neutral-800 max-w-68">
                   <BiBook className="text-2xl text-yellow-400" />
                   <span>{movieObject?.Type}</span>
                 </div>
-                <div className="flex flex-row gap-3 items-center p-2 bg-neutral-700 rounded-lg max-w-88">
+                <div className="flex flex-row gap-3 items-center p-2 bg-neutral-700/35 rounded-lg border-[1px] border-neutral-700 shadow-md shadow-neutral-800 max-w-88">
                   <BiWorld className="text-2xl text-yellow-400" />
                   <span className="md:text-sm text-[9px]">
                     {movieObject?.Country}
@@ -161,7 +161,7 @@ export default function DetailedInfoMovie() {
               {/* Stars */}
               <div
                 className="flex flex-row gap-2 text-4xl text-yellow-400 py-5 justify-center items-center
-                bg-neutral-700 rounded-lg"
+                bg-neutral-700/35 rounded-lg border-[1px] border-neutral-700 shadow-lg shadow-neutral-800"
               >
                 {[...Array(10)].map((_, index) => (
                   <div
@@ -170,9 +170,9 @@ export default function DetailedInfoMovie() {
                     className="cursor-pointer"
                   >
                     {index < ratingStars ? (
-                      <FaStar className="md:size-10 size-5" />
+                      <FaStar className="size-9 max-[624px]:size-6 max-[480px]:size-4" />
                     ) : (
-                      <FaRegStar className="md:size-10 size-5" />
+                      <FaRegStar className="size-9 max-[624px]:size-6 max-[480px]:size-4" />
                     )}
                   </div>
                 ))}

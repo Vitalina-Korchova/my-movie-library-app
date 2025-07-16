@@ -104,8 +104,8 @@ export default function DropdownMenu({
         <button
           id="searchByGenres"
           onClick={toggleDropdown}
-          className="text-black w-[150px] h-10 mb-1 bg-yellow-400 font-medium
-                  rounded-lg px-5 py-2.5 text-center flex justify-between items-center cursor-pointer"
+          className="text-black w-[190px] h-10 mb-1 bg-yellow-400 font-medium
+                  rounded-lg ps-2 pe-5 py-2.5 text-center flex justify-between items-center cursor-pointer"
           type="button"
         >
           {value || "Genres"}
@@ -115,14 +115,14 @@ export default function DropdownMenu({
         {isOpen && (
           <div
             id="dropdown"
-            className="absolute top-full left-0 z-10 bg-black rounded-lg shadow-sm w-36 "
+            className="absolute top-full left-0 z-10 bg-black rounded-lg shadow-sm w-[180px] "
           >
             <div className="max-h-40 overflow-y-auto custom-scrollbar ">
               {arrGenres.map((genre, index) => (
                 <span
                   key={index}
                   onClick={() => handleSelectGenre(genre)}
-                  className="block text-white  px-4 rounded-lg py-2 cursor-pointer hover:bg-gray-800 hover:text-yellow-400"
+                  className="block text-white ps-2 pe-4 rounded-lg py-2 cursor-pointer hover:bg-gray-800 hover:text-yellow-400"
                 >
                   {genre}
                 </span>
