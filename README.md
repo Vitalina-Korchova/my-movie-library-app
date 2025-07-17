@@ -2,6 +2,8 @@
 
 **My Movie Library** is a web application that allows users to search, save, and rate their personal movie collection. It provides detailed information about each movie, supports filtering, and offers a modern, responsive interface. This project was developed without local storage!
 
+🌐 **Live Demo**: [my-movie-library-app](https://vitalina-korchova.github.io/my-movie-library-app/)
+
 ## 🔧 Technologies Used
 
 - **React** + **TypeScript**
@@ -11,9 +13,6 @@
 - **React Router** — handles navigation
 - **Redux Toolkit** — state management
 - **RTK Query** — data fetching and caching
-
-
-🌐 **Live Demo**: [my-movie-library-app](https://vitalina-korchova.github.io/my-movie-library-app/)
 
 
 ## 🚀 Features
