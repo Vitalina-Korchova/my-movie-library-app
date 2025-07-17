@@ -41,25 +41,34 @@ export default function DetailsMovieObject({
     : userRating ?? 0;
   return (
     <>
-      <div className="flex flex-col">
+      <div className="flex flex-col mt-8">
         <div className="flex flex-row rounded-lg ">
           <img
             src={poster}
             alt=""
-            className="rounded-lg w-32 h-60 md:w-48 md:h-auto"
+            className="rounded-lg w-32 h-60 md:w-48 md:h-auto shadow-md shadow-black"
           />
           <div className="px-5 flex flex-col gap-5">
             <span className="font-bold text-wrap text-lg md:text-2xl">
               {title}
             </span>
             <div>
-              <span className="text-xs md:text-base">{year} year </span>
-              <span className="text-xs md:text-base">• {runtime}</span>
+              <span className="text-xs md:text-base font-medium">
+                {year} year
+              </span>
+              <span className="text-xs md:text-base font-medium">
+                • {runtime}
+              </span>
             </div>
-            <span className="text-xs md:text-base">{genres}</span>
-            <span className="text-xs md:text-base">{country}</span>
-            <span className="text-xs md:text-base">
-              IMDb Rating: {rating} / 10
+            <span className="text-xs md:text-base  text-gray-500">
+              {genres}
+            </span>
+            <span className="text-xs md:text-base text-gray-500 ">
+              {country}
+            </span>
+            <span className="text-xs md:text-base  text-gray-500">
+              IMDb Rating:{" "}
+              <span className="text-white font-medium">{rating} / 10</span>
             </span>
           </div>
         </div>

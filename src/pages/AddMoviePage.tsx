@@ -150,25 +150,27 @@ export default function AddMoviePage() {
                 </>
               ) : (
                 <>
-                  {movieObjects.map((movie, index) => {
-                    return (
-                      <FoundMovieObject
-                        key={index}
-                        imgUrl={movie.Poster}
-                        title={movie.Title}
-                        year={movie.Year}
-                        type={movie.Type}
-                        imdbID={movie.imdbID}
-                        onSelect={(id) => setSelectedMovieId(id)}
-                      />
-                    );
-                  })}
+                  <div className="flex flex-row gap-4 flex-wrap items-center justify-center">
+                    {movieObjects.map((movie, index) => {
+                      return (
+                        <FoundMovieObject
+                          key={index}
+                          imgUrl={movie.Poster}
+                          title={movie.Title}
+                          year={movie.Year}
+                          type={movie.Type}
+                          imdbID={movie.imdbID}
+                          onSelect={(id) => setSelectedMovieId(id)}
+                        />
+                      );
+                    })}
+                  </div>
                 </>
               )}
             </div>
           </div>
           <div
-            className=" p-5 w-full rounded-lg relative h-[640px] md:h-[680px]  bg-neutral-800/60 
+            className=" p-5 w-full rounded-lg relative h-auto md:h-[680px]   bg-neutral-800/60 
           border-[1px] border-neutral-800 shadow-lg shadow-stone-900"
           >
             <button

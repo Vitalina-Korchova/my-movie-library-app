@@ -19,16 +19,19 @@ export default function FoundMovieObject({
     <>
       <div
         onClick={() => onSelect(imdbID)}
-        className="py-6 px-3 flex flex-row space-x-5 cursor-pointer items-center"
+        className=" cursor-pointer border-[1px] border-white rounded-lg shadow-sm shadow-white  relative"
       >
-        <img src={imgUrl} alt="" className="w-16 h-24 rounded-lg" />
-        <div className="flex flex-col gap-3">
-          <span className="font-bold">{title}</span>
-          <span>{year}</span>
-          <span>Type: {type}</span>
+        <img src={imgUrl} alt="" className="w-40 h-52 rounded-lg " />
+        <div className="bg-black/55 w-40 h-20 backdrop-blur-md absolute bottom-0 left-0 rounded-lg ">
+          <div className="flex flex-col gap-1 text-[10px] p-2">
+            <span className="font-bold ">{title}</span>
+            <div className="space-x-4">
+              <span>{year}</span>
+              <span>Type: {type}</span>
+            </div>
+          </div>
         </div>
       </div>
-      <hr className="text-neutral-600" />
     </>
   );
 }
