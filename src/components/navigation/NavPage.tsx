@@ -66,7 +66,9 @@ export default function NavPage() {
                       <Link to="/my-movie-library-app">
                         <span
                           className={`inline-block  hover:text-yellow-400 text-xl max-[465px]:text-lg ${
-                            isActive("/") ? "text-yellow-400" : "text-white"
+                            isActive("/my-movie-library-app")
+                              ? "text-yellow-400"
+                              : "text-white"
                           }`}
                         >
                           Home
@@ -77,7 +79,7 @@ export default function NavPage() {
                       <Link to="/my-movie-library-app/movie-library">
                         <span
                           className={`inline-block   hover:text-yellow-400 text-xl max-[465px]:text-lg ${
-                            isActive("/movie-library")
+                            isActive("/my-movie-library-app/movie-library")
                               ? "text-yellow-400"
                               : "text-white"
                           }`}
@@ -90,7 +92,7 @@ export default function NavPage() {
                       <Link to="/my-movie-library-app/add-movie">
                         <span
                           className={`inline-block   hover:text-yellow-400 text-xl max-[465px]:text-lg ${
-                            isActive("/add-movie")
+                            isActive("/my-movie-library-app/add-movie")
                               ? "text-yellow-400"
                               : "text-white"
                           }`}
@@ -109,7 +111,9 @@ export default function NavPage() {
                 <Link to="/my-movie-library-app" className="relative group">
                   <span
                     className={`inline-block  text-white hover:text-yellow-400 ${
-                      isActive("/") ? "text-yellow-400" : "text-white"
+                      isActive("/my-movie-library-app")
+                        ? "text-yellow-400"
+                        : "text-white"
                     }`}
                   >
                     Home
@@ -122,7 +126,7 @@ export default function NavPage() {
                 >
                   <span
                     className={`inline-block  text-white hover:text-yellow-400 ${
-                      isActive("/movie-library")
+                      isActive("/my-movie-library-app/movie-library")
                         ? "text-yellow-400"
                         : "text-white"
                     }`}
@@ -137,7 +141,9 @@ export default function NavPage() {
                 >
                   <span
                     className={`inline-block  text-white hover:text-yellow-400 ${
-                      isActive("/add-movie") ? "text-yellow-400" : "text-white"
+                      isActive("/my-movie-library-app/add-movie")
+                        ? "text-yellow-400"
+                        : "text-white"
                     }`}
                   >
                     Add movie
