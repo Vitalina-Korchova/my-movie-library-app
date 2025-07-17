@@ -45,7 +45,7 @@ export default function GeneralInfoMovie({
         >
           {Plot}
         </span>
-        <Link to={`/movie/${imdbID}`}>
+        <Link to={`/my-movie-library-app/movie/${imdbID}`}>
           <button
             className="text-yellow-400 bg-transparent border-[1px] border-yellow-400 p-2
            rounded-md  cursor-pointer hover:text-black hover:bg-yellow-400 

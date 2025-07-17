@@ -33,7 +33,7 @@ export default function NavPage() {
     <>
       <div className="relative flex flex-row py-5 px-10 justify-between bg-none items-center">
         <div className=" flex flex-row w-full justify-between items-center">
-          <Link to="/">
+          <Link to="/my-movie-library-app">
             <Logo />
           </Link>
           <IoMenu
@@ -63,7 +63,7 @@ export default function NavPage() {
                       />
                     </div>
                     <div>
-                      <Link to="/">
+                      <Link to="/my-movie-library-app">
                         <span
                           className={`inline-block  hover:text-yellow-400 text-xl max-[465px]:text-lg ${
                             isActive("/") ? "text-yellow-400" : "text-white"
@@ -74,7 +74,7 @@ export default function NavPage() {
                       </Link>
                     </div>
                     <div>
-                      <Link to="/movie-library">
+                      <Link to="/my-movie-library-app/movie-library">
                         <span
                           className={`inline-block   hover:text-yellow-400 text-xl max-[465px]:text-lg ${
                             isActive("/movie-library")
@@ -87,7 +87,7 @@ export default function NavPage() {
                       </Link>
                     </div>
                     <div>
-                      <Link to="/add-movie">
+                      <Link to="/my-movie-library-app/add-movie">
                         <span
                           className={`inline-block   hover:text-yellow-400 text-xl max-[465px]:text-lg ${
                             isActive("/add-movie")
@@ -106,7 +106,7 @@ export default function NavPage() {
           ) : (
             <>
               <div className="hidden md:flex  flex-row space-x-10">
-                <Link to="/" className="relative group">
+                <Link to="/my-movie-library-app" className="relative group">
                   <span
                     className={`inline-block  text-white hover:text-yellow-400 ${
                       isActive("/") ? "text-yellow-400" : "text-white"
@@ -116,7 +116,10 @@ export default function NavPage() {
                     <span className="absolute left-1/2 bottom-0 w-0 h-[1px] bg-yellow-400 transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
                   </span>
                 </Link>
-                <Link to="/movie-library" className="relative group">
+                <Link
+                  to="/my-movie-library-app/movie-library"
+                  className="relative group"
+                >
                   <span
                     className={`inline-block  text-white hover:text-yellow-400 ${
                       isActive("/movie-library")
@@ -128,7 +131,10 @@ export default function NavPage() {
                     <span className="absolute left-1/2 bottom-0 w-0 h-[1px] bg-yellow-400 transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
                   </span>
                 </Link>
-                <Link to="/add-movie" className="relative group">
+                <Link
+                  to="/my-movie-library-app/add-movie"
+                  className="relative group"
+                >
                   <span
                     className={`inline-block  text-white hover:text-yellow-400 ${
                       isActive("/add-movie") ? "text-yellow-400" : "text-white"

@@ -107,7 +107,7 @@ export default function ObjectContainer({
           </div>
         )}
         {filteredMovies.map((m) => (
-          <Link key={m.imdbID} to={`/movie/${m.imdbID}`} className="block">
+          <Link key={m.imdbID} to={`/my-movie-library-app/movie/${m.imdbID}`} className="block">
             <MovieObjectLibrary
               imdbID={m.imdbID}
               Poster={m.Poster}
