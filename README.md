@@ -13,7 +13,7 @@
 - **RTK Query** — data fetching and caching
 
 
-🌐 **Live Demo**: [my-movie-library-app](https://my-movie-library-app.netlify.app](https://vitalina-korchova.github.io/my-movie-library-app/))
+🌐 **Live Demo**: [my-movie-library-app](https://vitalina-korchova.github.io/my-movie-library-app/)
 
 
 ## 🚀 Features
