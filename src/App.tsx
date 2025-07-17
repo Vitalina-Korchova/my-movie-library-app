@@ -15,10 +15,19 @@ export default function App() {
       <Provider store={store}>
         <Router>
           <Routes>
-            <Route path="/" element={<MainPage />} />
-            <Route path="/movie-library" element={<LibraryPage />} />
-            <Route path="/add-movie" element={<AddMoviePage />} />
-            <Route path="/movie/:id" element={<DetailedInfoMovie />} />
+            <Route path="/my-movie-library-app/" element={<MainPage />} />
+            <Route
+              path="/my-movie-library-app/movie-library"
+              element={<LibraryPage />}
+            />
+            <Route
+              path="/my-movie-library-app/add-movie"
+              element={<AddMoviePage />}
+            />
+            <Route
+              path="/my-movie-library-app/movie/:id"
+              element={<DetailedInfoMovie />}
+            />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Router>

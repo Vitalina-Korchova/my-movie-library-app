@@ -160,7 +160,9 @@ export default function AddMoviePage() {
                           year={movie.Year}
                           type={movie.Type}
                           imdbID={movie.imdbID}
-                          onSelect={(id) => setSelectedMovieId(id)}
+                          onSelect={(id) => {
+                            if (id) setSelectedMovieId(id);
+                          }}
                         />
                       );
                     })}
