@@ -71,16 +71,17 @@ export default function ObjectContainer({
     const matchesYear = year
       ? movie.Year?.toString().includes(year.toLowerCase())
       : true;
+
     const matchesGenre = genre
-      ? movie.Genre?.map((g) => g.trim().toLowerCase()).some((g) =>
-          g.includes(genre.toLowerCase())
-        )
+      ? movie.Genre?.split(",")
+          .map((g) => g.trim().toLowerCase())
+          .some((g) => g.includes(genre.toLowerCase()))
       : true;
 
     const matchesActor = actor
-      ? movie.Actor?.map((a) => a.trim().toLowerCase()).some((a) =>
-          a.includes(actor.toLowerCase())
-        )
+      ? movie.Actor?.split(",")
+          .map((a) => a.trim().toLowerCase())
+          .some((a) => a.includes(actor.toLowerCase()))
       : true;
 
     const matchesCountry = country
@@ -107,7 +108,11 @@ export default function ObjectContainer({
           </div>
         )}
         {filteredMovies.map((m) => (
-          <Link key={m.imdbID} to={`/my-movie-library-app/movie/${m.imdbID}`} className="block">
+          <Link
+            key={m.imdbID}
+            to={`/my-movie-library-app/movie/${m.imdbID}`}
+            className="block"
+          >
             <MovieObjectLibrary
               imdbID={m.imdbID}
               Poster={m.Poster}
