@@ -59,9 +59,11 @@ export default function ObjectContainer({
     Poster: movie.Poster,
     Title: movie.Title,
     Year: movie.Year,
-    Genre: movie.Genre,
-    Actor: movie.Actors,
-    Country: movie.Country,
+    Genre: Array.isArray(movie.Genre) ? movie.Genre.join(", ") : movie.Genre,
+    Actor: Array.isArray(movie.Actors) ? movie.Actors.join(", ") : movie.Actors,
+    Country: Array.isArray(movie.Country)
+      ? movie.Country.join(", ")
+      : movie.Country,
   }));
 
   const filteredMovies = moviesInLibrary.filter((movie) => {
@@ -85,7 +87,9 @@ export default function ObjectContainer({
       : true;
 
     const matchesCountry = country
-      ? movie.Country?.toLowerCase().includes(country.toLowerCase())
+      ? movie.Country?.split(",")
+          .map((c) => c.trim().toLowerCase())
+          .some((c) => c.includes(country.toLowerCase()))
       : true;
 
     return (
